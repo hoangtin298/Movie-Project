@@ -1,6 +1,6 @@
 import Dashboard from "../containers/AdminTemplate/Dashboard";
-import SignIn from "../containers/AdminTemplate/SignIn";
-import SignUp from "../containers/AdminTemplate/SignUp";
+import SignIn from "../containers/HomeTemplate/SignIn";
+import SignUp from "../containers/HomeTemplate/SignUp";
 import Home from "../containers/HomeTemplate/Home";
 
 const routeHome = [
@@ -8,14 +8,6 @@ const routeHome = [
     exact: true,
     path: "/",
     component: Home,
-  },
-];
-
-const routeAdmin = [
-  {
-    exact: true,
-    path: "/dashboard",
-    component: Dashboard,
   },
   {
     exact: false,
@@ -26,6 +18,14 @@ const routeAdmin = [
     exact: false,
     path: "/sign-up",
     component: SignUp,
+  },
+];
+
+const routeAdmin = [
+  {
+    exact: true,
+    path: "/dashboard",
+    component: Dashboard,
   },
 ];
 

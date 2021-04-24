@@ -10,6 +10,7 @@ function TopBarAuth(props) {
   const dispatch = useDispatch();
 
   const currentUser = useSelector((state) => state.currentUserReducer);
+  console.log("render top bar auth with ", currentUser);
 
   const renderUser = () => {
     return (

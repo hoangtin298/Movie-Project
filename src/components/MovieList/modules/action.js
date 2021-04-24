@@ -5,7 +5,7 @@ export const actGetMovieListApi = (soTrang, soPhanTuTrenTrang) => {
   return (dispatch) => {
     dispatch(actGetMovieListRequest());
     axios({
-      url: `https://movie0706.cybersoft.edu.vn/api/QuanLyPhim/LayDanhSachPhimPhanTrang?maNhom=GP09`,
+      url: `https://movie0706.cybersoft.edu.vn/api/QuanLyPhim/LayDanhSachPhimPhanTrang`,
       method: "GET",
       params: {
         maNhom: "GP09",

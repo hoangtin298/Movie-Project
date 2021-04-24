@@ -13,6 +13,9 @@ const useStyles = makeStyles((theme) => ({
     "& > * + *": {
       marginTop: theme.spacing(2),
     },
+    display: "flex",
+    justifyContent: "center",
+    marginTop: "20px",
   },
 }));
 
@@ -65,26 +68,14 @@ function MovieList(props) {
   };
 
   return (
-    <Container
-      style={{
-        marginTop: "70px",
-      }}
-      maxWidth="lg"
-    >
+    <Container maxWidth="lg">
       {movieList.loading ? renderLoading() : null}
 
       <Grid container spacing={3}>
         {movieList.data ? renderMovieList() : null}
       </Grid>
 
-      <div
-        className={classes.pagination}
-        style={{
-          display: "flex",
-          justifyContent: "center",
-          marginTop: "20px",
-        }}
-      >
+      <div className={classes.pagination}>
         <Pagination count={7} page={currentPage} onChange={handleChange} />
       </div>
     </Container>

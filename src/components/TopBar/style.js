@@ -3,6 +3,8 @@ export const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
   },
+  offset: theme.mixins.toolbar,
+  appBar: {},
   toolBar: {
     backgroundColor: theme.palette.common.white,
   },

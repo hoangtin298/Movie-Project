@@ -23,7 +23,7 @@ const TopBar = (ComponentItems, ComponentAuth) => {
 
     return (
       <div className={classes.root}>
-        <AppBar position="fixed" color="default">
+        <AppBar position="fixed" color="default" className={classes.appBar}>
           <Toolbar className={classes.toolBar}>
             <MyGridContainer justify="flex-start" spacing={2}>
               {/* Logo */}
@@ -40,8 +40,8 @@ const TopBar = (ComponentItems, ComponentAuth) => {
                   />
                 </Grid>
               ) : (
-                // <Component />
                 <>
+                  {setOpen(false)}
                   <MyGridContainer className={classes.headData} item lg={8}>
                     <ComponentItems className={classes.headDataItems} />
                   </MyGridContainer>
@@ -58,7 +58,7 @@ const TopBar = (ComponentItems, ComponentAuth) => {
             </MyGridContainer>
           </Toolbar>
         </AppBar>
-
+        <Toolbar className={classes.offset}></Toolbar>
         <Drawer
           anchor="left"
           open={open}
