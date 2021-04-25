@@ -19,34 +19,17 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-function MovieList(props) {
-  const movieList = useSelector((state) => state.movieListReducer);
-  const dispatch = useDispatch();
-
-  const [currentPage, setCurrentPage] = useState(1);
-  const classes = useStyles();
-
-  const handleChange = (event, value) => {
-    setCurrentPage(value);
-    dispatch(actGetMovieListApi(value.toString(), "8"));
-  };
-
-  useEffect(() => {
-    // so trang hien tai va so phan tu tren trang
-    dispatch(actGetMovieListApi("1", "8"));
-  }, []);
-
-  const renderMovieList = () => {
-    return movieList.data.map((item) => {
+const renderMovieList = (movieList) => {
+  return movieList.data.map((item) => {
       return (
         <Grid key={item.maPhim} item={true} xs={4}>
           <MovieSingle data={item} />
         </Grid>
       );
     });
-  };
+};
 
-  const renderLoading = () => {
+const renderLoading = () => {
     return (
       <div
         style={{
@@ -67,12 +50,29 @@ function MovieList(props) {
     );
   };
 
+function MovieList(props) {
+  const movieList = useSelector((state) => state.movieListReducer);
+  const dispatch = useDispatch();
+
+  const [currentPage, setCurrentPage] = useState(1);
+  const classes = useStyles();
+
+  const handleChange = (event, value) => {
+    setCurrentPage(value);
+    dispatch(actGetMovieListApi(value.toString(), "8"));
+  };
+
+  useEffect(() => {
+    // so trang hien tai va so phan tu tren trang
+    dispatch(actGetMovieListApi("1", "8"));
+  }, []);
+
   return (
     <Container maxWidth="lg">
       {movieList.loading ? renderLoading() : null}
 
       <Grid container spacing={3}>
-        {movieList.data ? renderMovieList() : null}
+        {movieList.data ? renderMovieList(movieList) : null}
       </Grid>
 
       <div className={classes.pagination}>
