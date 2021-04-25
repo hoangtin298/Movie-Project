@@ -9,7 +9,6 @@ export const actGetCinemaListApi = () => {
       method: "GET",
     })
       .then((result) => {
-        console.log(result.data);
         dispatch(actGetCinemaListSuccess(result.data));
       })
       .catch((error) => {
