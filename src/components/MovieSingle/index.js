@@ -24,7 +24,7 @@ function MovieSingle(props) {
           <Typography gutterBottom variant="h5" component="h2">
             {props.data.tenPhim}
           </Typography>
-          <Typography variant="body2" color="textSecondary" component="p">
+          <Typography variant="body2" component="p">
             {props.data.moTa}
           </Typography>
         </CardContent>
