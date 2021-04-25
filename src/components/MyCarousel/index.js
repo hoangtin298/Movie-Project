@@ -31,11 +31,6 @@ function MyCarousel(props) {
     },
     {
       hinhAnh:
-        "https://s3img.vcdn.vn/123phim/2021/04/mortal-kombat-16177818818286.png",
-      alt: "Img alt",
-    },
-    {
-      hinhAnh:
         "https://s3img.vcdn.vn/123phim/2021/04/ban-tay-diet-quy-evil-expeller-16177781815781.png",
       alt: "Img alt",
     },
