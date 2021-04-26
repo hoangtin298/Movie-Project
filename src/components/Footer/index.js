@@ -34,7 +34,7 @@ const Footer = () => {
   };
   return (
     <footer className={classes.root}>
-      <Container maxWidth="lg">
+      <Container maxWidth="md">
         <Grid container>
           <Grid item xs={4}>
             <Typography>
@@ -135,7 +135,7 @@ const Footer = () => {
             </Grid>
           </Grid>
         </Grid>
-        <Divider light />
+        <Divider className={classes.divider} />
         <Typography className={classes.footerSpacing}>
           <Grid container >
             <Grid item xs={2} className={classes.footerSpacingTop}>

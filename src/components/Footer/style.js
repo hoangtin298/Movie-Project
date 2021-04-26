@@ -1,39 +1,21 @@
 import { makeStyles } from "@material-ui/core/styles";
 export const useStyles = makeStyles((theme) => ({
     root: {
-        backgroundColor: '#222222',
+        backgroundColor: theme.palette.grey[900],
         color: '#f5f7ea',
-        width: '100%'
-    },
-    footerTypograhy: {
-        display: 'flex',
-        flexDirection: 'column',
+        width: '100%',
+        paddingBottom:theme.spacing(3)
     },
     footerTypograhyLabel: {
-        fontSize: '12px',
-        color: '#fff',
+        fontSize: theme.typography.h6.fontSize,
+        color: theme.palette.common.white,
         padding: '20px 0 10px 0'
     },
     footerLink: {
         paddingBottom: '7px',
-        fontSize: '12px!important',
+        fontSize: theme.typography.h6.fontSize,
         whitespace: 'nowrap',
-        color: '#949494',
-        textDecoration: 'none!important',
-        transition: '0.4s',
-        "&:hover": {
-            color: '#fff',
-        }
-    },
-    flexExtention: {
-        display: 'flex',
-        flexDirection: 'column'
-    },
-    footerLink: {
-        paddingBottom: '7px',
-        fontSize: '12px!important',
-        whitespace: 'nowrap',
-        color: '#949494',
+        color: theme.palette.grey[500],
         textDecoration: 'none!important',
         transition: '0.4s',
         "&:hover": {
@@ -55,5 +37,8 @@ export const useStyles = makeStyles((theme) => ({
         "&:hover": {
             filter: 'grayscale(80%)',
         }
+    },
+    divider: {
+        backgroundColor: theme.palette.grey[300],
     },
 }));
