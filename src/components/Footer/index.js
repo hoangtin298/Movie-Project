@@ -34,7 +34,7 @@ const Footer = () => {
   };
   return (
     <footer className={classes.root}>
-      <Container maxWidth="md">
+      <Container maxWidth="lg">
         <Grid container>
           <Grid item xs={4}>
             <Typography>
@@ -137,7 +137,7 @@ const Footer = () => {
         </Grid>
         <Divider className={classes.divider} />
         <Typography className={classes.footerSpacing}>
-          <Grid container >
+          <Grid container>
             <Grid item xs={2} className={classes.footerSpacingTop}>
               <img src={zionlogo} width="100" />
             </Grid>
@@ -145,14 +145,14 @@ const Footer = () => {
               <Typography variant="h6" className={classes.footerTypograhyLabel}>
                 TIX – SẢN PHẨM CỦA CÔNG TY CỔ PHẦN ZION
               </Typography>
-              <Typography variant="h6" >
+              <Typography variant="h6">
                 Địa chỉ: Z06 Đường số 13, Phường Tân Thuận Đông, Quận 7, Tp. Hồ
                 Chí Minh, Việt Nam.
               </Typography>
-              <Typography variant="h6" >
+              <Typography variant="h6">
                 Giấy chứng nhận đăng ký kinh doanh số: 0101659783,
               </Typography>
-              <Typography variant="h6" >
+              <Typography variant="h6">
                 đăng ký thay đổi lần thứ 30, ngày 22 tháng 01 năm 2020 do Sở kế
                 hoạch và đầu tư Thành phố Hồ Chí Minh cấp.
               </Typography>
@@ -160,7 +160,7 @@ const Footer = () => {
                 Số Điện Thoại (Hotline): 1900 545 436
               </Typography>
             </Grid>
-            <Grid item xs={2}  className={classes.footerSpacingTop}>
+            <Grid item xs={2} className={classes.footerSpacingTop}>
               <img src={bctlogo} width="100" />
             </Grid>
           </Grid>
