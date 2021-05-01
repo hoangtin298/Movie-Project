@@ -10,7 +10,7 @@ import { Hidden } from "@material-ui/core";
 const Home = () => {
   return (
     <>
-      <Hidden smDown>
+      <Hidden xsDown>
         <MyCarousel />
       </Hidden>
       <MovieList />

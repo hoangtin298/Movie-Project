@@ -1,6 +1,7 @@
 import Dashboard from "../containers/AdminTemplate/Dashboard";
 import SignIn from "../containers/AdminTemplate/SignIn";
 import SignUp from "../containers/AdminTemplate/SignUp";
+import Detail from "../containers/HomeTemplate/Detail";
 import Home from "../containers/HomeTemplate/Home";
 
 const routeHome = [
@@ -8,6 +9,11 @@ const routeHome = [
     exact: true,
     path: "/",
     component: Home,
+  },
+  {
+    exact: false,
+    path: "/detail/:id",
+    component: Detail,
   },
 ];
 

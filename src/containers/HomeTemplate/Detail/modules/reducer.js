@@ -6,19 +6,22 @@ const initialState = {
   error: null,
 };
 
-export const movieListReducer = (state = initialState, { type, payload }) => {
+export const movieDetailReducer = (
+  state = initialState,
+  { type, payload, ...action }
+) => {
   switch (type) {
-    case actionTypes.GET_MOVIE_LIST_REQUEST:
+    case actionTypes.GET_MOVIE_DETAIL_REQUEST:
       state.loading = true;
       state.data = null;
       state.error = null;
       return { ...state };
-    case actionTypes.GET_MOVIE_LIST_SUCCESS:
+    case actionTypes.GET_MOVIE_DETAIL_SUCCESS:
       state.loading = false;
       state.data = payload;
       state.error = null;
       return { ...state };
-    case actionTypes.GET_MOVIE_LIST_FAILED:
+    case actionTypes.GET_MOVIE_DETAIL_FAILED:
       state.loading = false;
       state.data = null;
       state.error = payload;
