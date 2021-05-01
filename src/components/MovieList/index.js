@@ -81,6 +81,7 @@ function MovieList(props) {
         animation="slide"
         autoPlay={false}
         navButtonsAlwaysVisible={isMatchSm ? false : true}
+        navButtonsAlwaysInvisible={isMatchSm ? true : false}
         NextIcon={<NavigateNextIcon className={classes.navButton} />}
         PrevIcon={<NavigateBeforeIcon className={classes.navButton} />}
         navButtonsProps={{
