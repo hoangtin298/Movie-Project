@@ -1,20 +1,18 @@
 import * as actionTypes from "./constant";
 import axios from "axios";
 
-export const actGetMovieListApi = (soTrang, soPhanTuTrenTrang) => {
+export const actGetMovieListApi = () => {
   return (dispatch) => {
     dispatch(actGetMovieListRequest());
     axios({
-      url: `https://movie0706.cybersoft.edu.vn/api/QuanLyPhim/LayDanhSachPhimPhanTrang`,
+      url: `https://movie0706.cybersoft.edu.vn/api/QuanLyPhim/LayDanhSachPhim`,
       method: "GET",
       params: {
         maNhom: "GP09",
-        soTrang: soTrang,
-        soPhanTuTrenTrang: soPhanTuTrenTrang,
       },
     })
       .then((result) => {
-        dispatch(actGetMovieListSuccess(result.data.items));
+        dispatch(actGetMovieListSuccess(result.data));
       })
       .catch((error) => {
         dispatch(actGetMovieListFailed(error));
@@ -24,20 +22,20 @@ export const actGetMovieListApi = (soTrang, soPhanTuTrenTrang) => {
 
 const actGetMovieListRequest = () => {
   return {
-    type: actionTypes.GET_MOVIE_LIST_PAGING_REQUEST,
+    type: actionTypes.GET_MOVIE_LIST_REQUEST,
   };
 };
 
 const actGetMovieListSuccess = (list) => {
   return {
-    type: actionTypes.GET_MOVIE_LIST_PAGING_SUCCESS,
+    type: actionTypes.GET_MOVIE_LIST_SUCCESS,
     payload: list,
   };
 };
 
 const actGetMovieListFailed = (error) => {
   return {
-    type: actionTypes.GET_MOVIE_LIST_PAGING_FAILED,
+    type: actionTypes.GET_MOVIE_LIST_FAILED,
     payload: error,
   };
 };

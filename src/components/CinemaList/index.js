@@ -60,11 +60,11 @@ function CinemaList() {
   }, []);
 
   const classes = useStyles();
-  const [value, setValue] = React.useState(0);
+    const [value, setValue] = React.useState(0);
 
-  const handleChange = (event, newValue) => {
-    setValue(newValue);
-  };
+    const handleChange = (event, newValue) => {
+      setValue(newValue);
+    };
 
   return (
     <Container className={classes.root}>
@@ -76,6 +76,7 @@ function CinemaList() {
       >
         {cinemaList.data ? renderCinemaLogo(cinemaList.data) : null}
       </Tabs>
+      
       <TabPanel value={value} index={0}>
         Item One
       </TabPanel>

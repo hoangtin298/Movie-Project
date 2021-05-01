@@ -1,84 +1,116 @@
-import { Container, Grid } from "@material-ui/core";
+import { Container, Grid, useMediaQuery } from "@material-ui/core";
 import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import MovieSingle from "../MovieSingle";
 import { actGetMovieListApi } from "./modules/action";
 import Spinner from "react-spinner-material";
-import { makeStyles } from "@material-ui/core/styles";
-import Typography from "@material-ui/core/Typography";
-import Pagination from "@material-ui/lab/Pagination";
-
-const useStyles = makeStyles((theme) => ({
-  pagination: {
-    "& > * + *": {
-      marginTop: theme.spacing(2),
-    },
-    display: "flex",
-    justifyContent: "center",
-    marginTop: "20px",
-  },
-}));
-
-const renderMovieList = (movieList) => {
-  return movieList.data.map((item) => {
-      return (
-        <Grid key={item.maPhim} item={true} xs={4}>
-          <MovieSingle data={item} />
-        </Grid>
-      );
-    });
-};
+import { useTheme } from "@material-ui/core/styles";
+import Carousel from "react-material-ui-carousel";
+import FiberManualRecordIcon from "@material-ui/icons/FiberManualRecord";
+import NavigateNextIcon from "@material-ui/icons/NavigateNext";
+import NavigateBeforeIcon from "@material-ui/icons/NavigateBefore";
+import { useStyles } from "./style";
+const chunkArray = (arr, size) =>
+  Array.from({ length: Math.ceil(arr.length / size) }, (v, i) =>
+    arr.slice(i * size, i * size + size)
+  );
 
 const renderLoading = () => {
-    return (
-      <div
-        style={{
-          height: "80vh",
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
-          borderColor: "#0ff",
-        }}
-      >
-        <Spinner
-          size={120}
-          spinnerColor={"#00f"}
-          spinnerWidth={1}
-          visible={true}
-        />
-      </div>
-    );
-  };
+  return (
+    <div
+      style={{
+        height: "80vh",
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+        borderColor: "#0ff",
+      }}
+    >
+      <Spinner
+        size={120}
+        spinnerColor={"#00f"}
+        spinnerWidth={1}
+        visible={true}
+      />
+    </div>
+  );
+};
 
 function MovieList(props) {
   const movieList = useSelector((state) => state.movieListReducer);
   const dispatch = useDispatch();
-
-  const [currentPage, setCurrentPage] = useState(1);
+  const theme = useTheme();
+  const isMatchSm = useMediaQuery(theme.breakpoints.down("sm"));
   const classes = useStyles();
-
-  const handleChange = (event, value) => {
-    setCurrentPage(value);
-    dispatch(actGetMovieListApi(value.toString(), "8"));
+  const numberOfElement = () => {
+    if (isMatchSm) return 6;
+    return 8;
   };
-
   useEffect(() => {
-    // so trang hien tai va so phan tu tren trang
-    dispatch(actGetMovieListApi("1", "8"));
+    dispatch(actGetMovieListApi());
   }, []);
 
+  const renderMovieGroup = (movieGroup) => {
+    return movieGroup.map((item, index) => {
+      return (
+        <Container maxWidth="md" className={classes.movieGroup}>
+          <Grid key={index} container spacing={3}>
+            {renderMovieList(item)}
+          </Grid>
+        </Container>
+      );
+    });
+  };
+
+  const renderMovieList = (movieList) => {
+    return movieList.map((item) => {
+      return (
+        <Grid key={item.maPhim} item={true} md={3} sm={4} xs={12}>
+          <MovieSingle data={item} />
+        </Grid>
+      );
+    });
+  };
+
   return (
-    <Container maxWidth="lg">
+    <div className={classes.root}>
       {movieList.loading ? renderLoading() : null}
 
-      <Grid container spacing={3}>
-        {movieList.data ? renderMovieList(movieList) : null}
-      </Grid>
-
-      <div className={classes.pagination}>
-        <Pagination count={7} page={currentPage} onChange={handleChange} />
-      </div>
-    </Container>
+      <Carousel
+        className={classes.carousel}
+        animation="slide"
+        autoPlay={false}
+        navButtonsAlwaysVisible={isMatchSm ? false : true}
+        NextIcon={<NavigateNextIcon className={classes.navButton} />}
+        PrevIcon={<NavigateBeforeIcon className={classes.navButton} />}
+        navButtonsProps={{
+          style: {
+            backgroundColor: "transparent",
+          },
+        }}
+        navButtonsWrapperProps={{
+          style: {
+            top: "-8%",
+          },
+        }}
+        indicatorIconButtonProps={{
+          style: {
+            padding: "4px",
+          },
+        }}
+        IndicatorIcon={<FiberManualRecordIcon style={{ fontSize: "20px" }} />}
+        activeIndicatorIconButtonProps={{
+          style: {
+            color: theme.palette.primary.main,
+          },
+        }}
+        indicatorContainerProps={{}}
+      >
+        {movieList.data
+          ? renderMovieGroup(chunkArray(movieList.data, numberOfElement()))
+          : null}
+      </Carousel>
+    </div>
   );
 }
 

@@ -51,15 +51,17 @@ function App() {
   };
 
   return (
-    <BrowserRouter>
-      <Switch>
-        {showLayoutAdmin(routeAdmin)}
-        {showLayoutHome(routeHome)}
+    <div className="App">
+      <BrowserRouter>
+        <Switch>
+          {showLayoutAdmin(routeAdmin)}
+          {showLayoutHome(routeHome)}
 
-        {/* Không tìm ra trang nào */}
-        <Route path="" component={PageNotFound} />
-      </Switch>
-    </BrowserRouter>
+          {/* Không tìm ra trang nào */}
+          <Route path="" component={PageNotFound} />
+        </Switch>
+      </BrowserRouter>
+    </div>
   );
 }
 
