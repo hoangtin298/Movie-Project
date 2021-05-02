@@ -1,4 +1,13 @@
-import { Container, Grid, useMediaQuery } from "@material-ui/core";
+import {
+  Container,
+  Grid,
+  IconButton,
+  InputBase,
+  Paper,
+  TextField,
+  Typography,
+  useMediaQuery,
+} from "@material-ui/core";
 import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import MovieSingle from "../MovieSingle";
@@ -9,7 +18,9 @@ import Carousel from "react-material-ui-carousel";
 import FiberManualRecordIcon from "@material-ui/icons/FiberManualRecord";
 import NavigateNextIcon from "@material-ui/icons/NavigateNext";
 import NavigateBeforeIcon from "@material-ui/icons/NavigateBefore";
+import SearchIcon from "@material-ui/icons/Search";
 import { useStyles } from "./style";
+
 const chunkArray = (arr, size) =>
   Array.from({ length: Math.ceil(arr.length / size) }, (v, i) =>
     arr.slice(i * size, i * size + size)
@@ -41,7 +52,10 @@ function MovieList(props) {
   const dispatch = useDispatch();
   const theme = useTheme();
   const isMatchSm = useMediaQuery(theme.breakpoints.down("sm"));
+  const isMatchXs = useMediaQuery(theme.breakpoints.down("xs"));
+  const isMatch1100 = useMediaQuery("(max-width:1100px)");
   const classes = useStyles();
+  const [search, setSearch] = useState("");
   const numberOfElement = () => {
     if (isMatchSm) return 6;
     return 8;
@@ -49,6 +63,29 @@ function MovieList(props) {
   useEffect(() => {
     dispatch(actGetMovieListApi());
   }, []);
+
+  const handleOnChangeSearch = (e) => {
+    setSearch(e.target.value);
+  };
+
+  const handleOnClickSearch = () => {
+    if (search === "") {
+      dispatch(actGetMovieListApi());
+      return;
+    }
+    dispatch(actGetMovieListApi(search));
+  };
+
+  const handleOnKeyPress = (e) => {
+    if (e.keyCode == 13) {
+      e.preventDefault();
+      if (search === "") {
+        dispatch(actGetMovieListApi());
+        return;
+      }
+      dispatch(actGetMovieListApi(search));
+    }
+  };
 
   const renderMovieGroup = (movieGroup) => {
     return movieGroup.map((item, index) => {
@@ -73,15 +110,38 @@ function MovieList(props) {
   };
 
   return (
-    <div className={classes.root}>
+    <Container maxWidth="lg" className={classes.root}>
       {movieList.loading ? renderLoading() : null}
+
+      <Container maxWidth="md" className={classes.movieHead}>
+        <Grid container alignItems="center">
+          <Grid item xs={12} md={6}>
+            <Typography className={classes.title} variant="h1">
+              Danh sách phim đang chiếu
+            </Typography>
+          </Grid>
+          <Grid item xs={12} md={6}>
+            <Paper elevation={4} component="form" className={classes.paper}>
+              <InputBase
+                placeholder="Tìm kiếm phim"
+                className={classes.inputBase}
+                onChange={handleOnChangeSearch}
+                onKeyDown={handleOnKeyPress}
+              />
+              <IconButton onClick={handleOnClickSearch}>
+                <SearchIcon color="primary" />
+              </IconButton>
+            </Paper>
+          </Grid>
+        </Grid>
+      </Container>
 
       <Carousel
         className={classes.carousel}
         animation="slide"
         autoPlay={false}
-        navButtonsAlwaysVisible={isMatchSm ? false : true}
-        navButtonsAlwaysInvisible={isMatchSm ? true : false}
+        navButtonsAlwaysVisible={isMatch1100 ? false : true}
+        navButtonsAlwaysInvisible={isMatch1100 ? true : false}
         NextIcon={<NavigateNextIcon className={classes.navButton} />}
         PrevIcon={<NavigateBeforeIcon className={classes.navButton} />}
         navButtonsProps={{
@@ -94,11 +154,19 @@ function MovieList(props) {
             top: "-8%",
           },
         }}
-        indicatorIconButtonProps={{
-          style: {
-            padding: "4px",
-          },
-        }}
+        indicatorIconButtonProps={
+          isMatchXs
+            ? {
+                style: {
+                  padding: "1px",
+                },
+              }
+            : {
+                style: {
+                  padding: "4px",
+                },
+              }
+        }
         IndicatorIcon={<FiberManualRecordIcon style={{ fontSize: "20px" }} />}
         activeIndicatorIconButtonProps={{
           style: {
@@ -111,7 +179,7 @@ function MovieList(props) {
           ? renderMovieGroup(chunkArray(movieList.data, numberOfElement()))
           : null}
       </Carousel>
-    </div>
+    </Container>
   );
 }
 

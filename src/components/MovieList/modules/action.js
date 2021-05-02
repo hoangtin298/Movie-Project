@@ -1,7 +1,7 @@
 import * as actionTypes from "./constant";
 import axios from "axios";
 
-export const actGetMovieListApi = () => {
+export const actGetMovieListApi = (tenPhim) => {
   return (dispatch) => {
     dispatch(actGetMovieListRequest());
     axios({
@@ -9,6 +9,7 @@ export const actGetMovieListApi = () => {
       method: "GET",
       params: {
         maNhom: "GP09",
+        tenPhim,
       },
     })
       .then((result) => {

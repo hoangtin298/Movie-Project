@@ -59,7 +59,7 @@ export const useStyles = makeStyles((theme) => ({
     position: "relative",
     display: "block",
     [theme.breakpoints.down("xs")]: {
-      padding: theme.spacing(0, 2),
+      paddingLeft: theme.spacing(2),
     },
   },
   thongTinPhim: {

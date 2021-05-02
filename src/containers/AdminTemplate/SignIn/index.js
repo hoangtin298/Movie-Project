@@ -6,6 +6,8 @@ import {
   CssBaseline,
   FormControlLabel,
   Grid,
+  IconButton,
+  InputAdornment,
   TextField,
   Typography,
 } from "@material-ui/core";
@@ -17,6 +19,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { actSignInApi } from "./modules/action";
 import { Link, useHistory } from "react-router-dom";
 import Alert from "@material-ui/lab/Alert";
+import { Visibility, VisibilityOff } from "@material-ui/icons";
+import { useState } from "react";
 
 const schema = yup.object().shape({
   taiKhoan: yup.string().required("Đây là trường bắt buộc !"),
@@ -36,8 +40,18 @@ const SignIn = () => {
     resolver: yupResolver(schema),
   });
 
+  const [showPassword, setShowPassword] = useState(false);
+
   const onSubmit = (data) => {
     dispatch(actSignInApi(data, history));
+  };
+
+  const handleClickShowPassword = () => {
+    setShowPassword(!showPassword);
+  };
+
+  const handleMouseDownPassword = (event) => {
+    event.preventDefault();
   };
 
   return (
@@ -80,6 +94,20 @@ const SignIn = () => {
             inputRef={register}
             error={!!errors.matKhau}
             helperText={errors?.matKhau?.message}
+            type={showPassword ? "text" : "password"}
+            InputProps={{
+              endAdornment: (
+                <InputAdornment position="end">
+                  <IconButton
+                    onClick={handleClickShowPassword}
+                    onMouseDown={handleMouseDownPassword}
+                    edge="end"
+                  >
+                    {showPassword ? <Visibility /> : <VisibilityOff />}
+                  </IconButton>
+                </InputAdornment>
+              ),
+            }}
           />
           <FormControlLabel
             control={
