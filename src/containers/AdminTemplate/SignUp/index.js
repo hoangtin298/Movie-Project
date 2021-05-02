@@ -15,7 +15,9 @@ import { useForm } from "react-hook-form";
 import { actSignUpApi } from "./modules/action";
 import { Link } from "react-router-dom";
 import Alert from "@material-ui/lab/Alert";
-
+import { Visibility, VisibilityOff } from "@material-ui/icons";
+import { useState } from "react";
+import { IconButton, InputAdornment } from "@material-ui/core";
 const schema = yup.object().shape({
   hoTen: yup
     .string()
@@ -42,13 +44,19 @@ const SignUp = () => {
     mode: "onBlur",
     resolver: yupResolver(schema),
   });
-
+  const [showPassword, setShowPassword] = useState(false);
   const onSubmit = (data) => {
     data["maNhom"] = "GP09";
     data["maLoaiNguoiDung"] = "KhachHang";
     dispatch(actSignUpApi(data));
   };
+  const handleClickShowPassword = () => {
+    setShowPassword(!showPassword);
+  };
 
+  const handleMouseDownPassword = (event) => {
+    event.preventDefault();
+  };
   return (
     <Container component="main" maxWidth="xs">
       <CssBaseline />
@@ -92,6 +100,20 @@ const SignUp = () => {
                 inputRef={register}
                 error={!!errors.matKhau}
                 helperText={errors?.matKhau?.message}
+                type={showPassword ? "text" : "password"}
+                InputProps={{
+                  endAdornment: (
+                    <InputAdornment position="end">
+                      <IconButton
+                        onClick={handleClickShowPassword}
+                        onMouseDown={handleMouseDownPassword}
+                        edge="end"
+                      >
+                        {showPassword ? <Visibility /> : <VisibilityOff />}
+                      </IconButton>
+                    </InputAdornment>
+                  ),
+                }}
               />
             </Grid>
             <Grid item xs={12}>
@@ -107,6 +129,20 @@ const SignUp = () => {
                 inputRef={register}
                 error={!!errors.confirmPassWord}
                 helperText={errors?.confirmPassWord?.message}
+                type={showPassword ? "text" : "password"}
+                InputProps={{
+                  endAdornment: (
+                    <InputAdornment position="end">
+                      <IconButton
+                        onClick={handleClickShowPassword}
+                        onMouseDown={handleMouseDownPassword}
+                        edge="end"
+                      >
+                        {showPassword ? <Visibility /> : <VisibilityOff />}
+                      </IconButton>
+                    </InputAdornment>
+                  ),
+                }}
               />
             </Grid>
             <Grid item xs={12}>
