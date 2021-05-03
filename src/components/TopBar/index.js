@@ -8,7 +8,6 @@ import { Divider, Drawer, useTheme } from "@material-ui/core";
 import MenuIcon from "@material-ui/icons/Menu";
 import Logo from "../Logo";
 import MyGridContainer from "./MyGridContainer";
-
 // Start here
 const TopBar = (ComponentItems, ComponentAuth) => {
   const classes = useStyles();

@@ -30,7 +30,7 @@ const renderLoading = () => {
   return (
     <div
       style={{
-        height: "80vh",
+        height: "30vh",
         display: "flex",
         alignItems: "center",
         justifyContent: "center",
@@ -110,9 +110,7 @@ function MovieList(props) {
   };
 
   return (
-    <Container maxWidth="lg" className={classes.root}>
-      {movieList.loading ? renderLoading() : null}
-
+    <Container maxWidth="lg" className={classes.root} id="lichChieu">
       <Container maxWidth="md" className={classes.movieHead}>
         <Grid container alignItems="center">
           <Grid item xs={12} md={6}>
@@ -135,7 +133,7 @@ function MovieList(props) {
           </Grid>
         </Grid>
       </Container>
-
+      {movieList.loading ? renderLoading() : null}
       <Carousel
         className={classes.carousel}
         animation="slide"

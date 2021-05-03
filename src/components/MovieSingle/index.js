@@ -18,7 +18,7 @@ function MovieSingle(props) {
           container
           className={classes.thumbnail}
           style={{
-            backgroundImage: `url(${props.data.hinhAnh})`,
+            backgroundImage: `url(${props.data.hinhAnh}), url(https://tix.vn/app/assets/img/default-film.webp)`,
           }}
         >
           {/* Thumbnail when hover */}

@@ -1,7 +1,7 @@
 import React from "react";
 import { useHistory } from "react-router";
 import logo from "../../assets/tix-logo.png";
-
+import { animateScroll } from "react-scroll";
 const Logo = (props) => {
   const history = useHistory();
   return (
@@ -10,7 +10,7 @@ const Logo = (props) => {
       alt="Logo"
       {...props}
       onClick={() => {
-        history.push("/");
+        animateScroll.scrollToTop();
       }}
     />
   );
