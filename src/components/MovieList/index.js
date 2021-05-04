@@ -20,6 +20,8 @@ import NavigateNextIcon from "@material-ui/icons/NavigateNext";
 import NavigateBeforeIcon from "@material-ui/icons/NavigateBefore";
 import SearchIcon from "@material-ui/icons/Search";
 import { useStyles } from "./style";
+import { CollectionsOutlined } from "@material-ui/icons";
+import { Alert } from "@material-ui/lab";
 
 const chunkArray = (arr, size) =>
   Array.from({ length: Math.ceil(arr.length / size) }, (v, i) =>
@@ -133,13 +135,22 @@ function MovieList(props) {
           </Grid>
         </Grid>
       </Container>
+
       {movieList.loading ? renderLoading() : null}
+      {movieList.data && movieList.data.length === 0 ? (
+        <Container maxWidth="md">
+          <Alert variant="filled" severity="error" className={classes.alert}>
+            <Typography variant="h3">
+              Không có bộ phim nào trùng với từ khóa của bạn.
+            </Typography>
+          </Alert>
+        </Container>
+      ) : null}
       <Carousel
         className={classes.carousel}
         animation="slide"
         autoPlay={false}
-        navButtonsAlwaysVisible={isMatch1100 ? false : true}
-        navButtonsAlwaysInvisible={isMatch1100 ? true : false}
+        navButtonsAlwaysInvisible={true}
         NextIcon={<NavigateNextIcon className={classes.navButton} />}
         PrevIcon={<NavigateBeforeIcon className={classes.navButton} />}
         navButtonsProps={{

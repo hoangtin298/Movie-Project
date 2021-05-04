@@ -42,4 +42,9 @@ export const useStyles = makeStyles((theme) => ({
   movieHead: {
     marginBottom: theme.spacing(3),
   },
+  alert: {
+    justifyContent: "center",
+    alignItems: "center",
+    marginBottom: theme.spacing(4),
+  },
 }));
