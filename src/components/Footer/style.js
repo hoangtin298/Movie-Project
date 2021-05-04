@@ -49,10 +49,16 @@ export const useStyles = makeStyles((theme) => ({
     [theme.breakpoints.down("md")]: {
       padding: theme.spacing(3, 0),
     },
+    [theme.breakpoints.down("xs")]: {
+      padding: theme.spacing(2, 0, 0, 0),
+    },
   },
   alignTextMdD: {
     [theme.breakpoints.down("sm")]: {
       textAlign: "center",
     },
+  },
+  paddingthem: {
+    margin: theme.spacing(0, 2, 0, 0),
   },
 }));

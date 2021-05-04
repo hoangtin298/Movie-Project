@@ -34,7 +34,7 @@ const Footer = () => {
   };
   return (
     <footer className={classes.root}>
-      <Container maxWidth="lg">
+      <Container maxWidth="md">
         <Grid container>
           <Grid item xs={12} sm={4} lg={4}>
             <Hidden mdDown>
@@ -160,24 +160,19 @@ const Footer = () => {
               <Grid container>
                 <Grid item xs={12}>
                   <Typography className={classes.alignTextMdD}>
-                    <Grid container>
-                      <Grid item xs={6} sm={3}>
-                        <a
-                          target="_blank"
-                          href="https://apps.apple.com/vn/app/tix-%C4%91%E1%BA%B7t-v%C3%A9-nhanh-nh%E1%BA%A5t/id615186197"
-                        >
-                          <img src={fblogo} className={classes.footerPartner} />
-                        </a>
-                      </Grid>
-                      <Grid item xs={6} sm={3}>
-                        <a
-                          target="_blank"
-                          href="https://play.google.com/store/apps/details?id=vn.com.vng.phim123"
-                        >
-                          <img src={zalologo} width="30" />
-                        </a>
-                      </Grid>
-                    </Grid>
+                    <a
+                      className={classes.paddingthem}
+                      target="_blank"
+                      href="https://apps.apple.com/vn/app/tix-%C4%91%E1%BA%B7t-v%C3%A9-nhanh-nh%E1%BA%A5t/id615186197"
+                    >
+                      <img src={fblogo} className={classes.footerPartner} />
+                    </a>
+                    <a
+                      target="_blank"
+                      href="https://play.google.com/store/apps/details?id=vn.com.vng.phim123"
+                    >
+                      <img src={zalologo} width="30" />
+                    </a>
                   </Typography>
                 </Grid>
               </Grid>
