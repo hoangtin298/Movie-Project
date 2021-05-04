@@ -29,6 +29,10 @@ export const useStyles = makeStyles((theme) => ({
   },
   footerSpacing: {
     marginBottom: theme.spacing(2),
+    [theme.breakpoints.down("md")]: {
+      textAlign: "center",
+      marginBottom: theme.spacing(0),
+    },
   },
   footerSpacingTop: {
     marginTop: theme.spacing(3),
@@ -40,5 +44,15 @@ export const useStyles = makeStyles((theme) => ({
   },
   divider: {
     backgroundColor: theme.palette.grey[300],
+  },
+  spacingWhenmd: {
+    [theme.breakpoints.down("md")]: {
+      padding: theme.spacing(3, 0),
+    },
+  },
+  alignTextMdD: {
+    [theme.breakpoints.down("sm")]: {
+      textAlign: "center",
+    },
   },
 }));

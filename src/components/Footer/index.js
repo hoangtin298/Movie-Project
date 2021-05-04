@@ -2,7 +2,7 @@ import React from "react";
 import Grid from "@material-ui/core/Grid";
 import Container from "@material-ui/core/Container";
 import Divider from "@material-ui/core/Divider";
-import { Typography } from "@material-ui/core";
+import { Hidden, Typography } from "@material-ui/core";
 import { useStyles } from "./style";
 import { mangHinh } from "./data";
 import applelogo from "../../assets/apple-logo.png";
@@ -36,112 +36,168 @@ const Footer = () => {
     <footer className={classes.root}>
       <Container maxWidth="lg">
         <Grid container>
-          <Grid item xs={4}>
-            <Typography>
-              <Typography variant="h6" className={classes.footerTypograhyLabel}>
-                TIX
+          <Grid item xs={12} sm={4} lg={4}>
+            <Hidden mdDown>
+              <Typography>
+                <Typography
+                  variant="h6"
+                  className={classes.footerTypograhyLabel}
+                >
+                  TIX
+                </Typography>
+                <Grid container>
+                  <Grid item xs={6}>
+                    <a className={classes.footerLink}>FAQ</a>
+                  </Grid>
+                  <Grid item xs={6}>
+                    <a className={classes.footerLink}>Thỏa thuận sử dụng</a>
+                  </Grid>
+                  <Grid item xs={6}>
+                    <a className={classes.footerLink}>Brand Guidelines</a>
+                  </Grid>
+                  <Grid item xs={6}>
+                    <a className={classes.footerLink}>Chính sách bảo mật</a>
+                  </Grid>
+                </Grid>
               </Typography>
+            </Hidden>
+            <Hidden mdUp>
+              <Typography className={classes.spacingWhenmd} align="center">
+                <Grid container>
+                  <Grid item xs={6} sm={12}>
+                    <a className={classes.footerLink}>Thỏa thuận sử dụng</a>
+                  </Grid>
+                  <Grid item xs={6} sm={12}>
+                    <a className={classes.footerLink}>Chính sách bảo mật</a>
+                  </Grid>
+                </Grid>
+              </Typography>
+            </Hidden>
+          </Grid>
+          <Hidden mdDown>
+            <Grid item xs={4}>
+              <Typography>
+                <Typography
+                  variant="subtitle2"
+                  className={classes.footerTypograhyLabel}
+                >
+                  ĐỐI TÁC
+                </Typography>
+                <Grid container>{renderPartner()}</Grid>
+              </Typography>
+            </Grid>
+          </Hidden>
+          <Hidden mdDown>
+            <Grid item xs={4}>
               <Grid container>
                 <Grid item xs={6}>
-                  <a className={classes.footerLink}>FAQ</a>
-                </Grid>
-                <Grid item xs={6}>
-                  <a className={classes.footerLink}>Thỏa thuận sử dụng</a>
-                </Grid>
-                <Grid item xs={6}>
-                  <a className={classes.footerLink}>Brand Guidelines</a>
-                </Grid>
-                <Grid item xs={6}>
-                  <a className={classes.footerLink}>Chính sách bảo mật</a>
-                </Grid>
-              </Grid>
-            </Typography>
-          </Grid>
-          <Grid item xs={4}>
-            <Typography>
-              <Typography
-                variant="subtitle2"
-                className={classes.footerTypograhyLabel}
-              >
-                ĐỐI TÁC
-              </Typography>
-              <Grid container>{renderPartner()}</Grid>
-            </Typography>
-          </Grid>
-          <Grid item xs={4}>
-            <Grid container>
-              <Grid item xs={6}>
-                <Typography>
-                  <Typography
-                    variant="subtitle2"
-                    className={classes.footerTypograhyLabel}
-                  >
-                    MOBILE APP
+                  <Typography>
+                    <Typography
+                      variant="subtitle2"
+                      className={classes.footerTypograhyLabel}
+                    >
+                      MOBILE APP
+                    </Typography>
+                    <Grid container>
+                      <Grid item xs={3}>
+                        <a
+                          target="_blank"
+                          href="https://apps.apple.com/vn/app/tix-%C4%91%E1%BA%B7t-v%C3%A9-nhanh-nh%E1%BA%A5t/id615186197"
+                        >
+                          <img
+                            src={applelogo}
+                            className={classes.footerPartner}
+                          />
+                        </a>
+                      </Grid>
+                      <Grid item xs={3}>
+                        <a
+                          target="_blank"
+                          href="https://play.google.com/store/apps/details?id=vn.com.vng.phim123"
+                        >
+                          <img
+                            src={androidlogo}
+                            className={classes.footerPartner}
+                          />
+                        </a>
+                      </Grid>
+                    </Grid>
                   </Typography>
-                  <Grid container>
-                    <Grid item xs={3}>
-                      <a
-                        target="_blank"
-                        href="https://apps.apple.com/vn/app/tix-%C4%91%E1%BA%B7t-v%C3%A9-nhanh-nh%E1%BA%A5t/id615186197"
-                      >
-                        <img
-                          src={applelogo}
-                          className={classes.footerPartner}
-                        />
-                      </a>
+                </Grid>
+                <Grid item xs={6}>
+                  <Typography>
+                    <Typography
+                      variant="subtitle2"
+                      className={classes.footerTypograhyLabel}
+                    >
+                      SOCIAL
+                    </Typography>
+                    <Grid container>
+                      <Grid item xs={3}>
+                        <a
+                          target="_blank"
+                          href="https://apps.apple.com/vn/app/tix-%C4%91%E1%BA%B7t-v%C3%A9-nhanh-nh%E1%BA%A5t/id615186197"
+                        >
+                          <img src={fblogo} className={classes.footerPartner} />
+                        </a>
+                      </Grid>
+                      <Grid item xs={3}>
+                        <a
+                          target="_blank"
+                          href="https://play.google.com/store/apps/details?id=vn.com.vng.phim123"
+                        >
+                          <img src={zalologo} width="30" />
+                        </a>
+                      </Grid>
                     </Grid>
-                    <Grid item xs={3}>
-                      <a
-                        target="_blank"
-                        href="https://play.google.com/store/apps/details?id=vn.com.vng.phim123"
-                      >
-                        <img
-                          src={androidlogo}
-                          className={classes.footerPartner}
-                        />
-                      </a>
-                    </Grid>
-                  </Grid>
-                </Typography>
-              </Grid>
-              <Grid item xs={6}>
-                <Typography>
-                  <Typography
-                    variant="subtitle2"
-                    className={classes.footerTypograhyLabel}
-                  >
-                    SOCIAL
                   </Typography>
-                  <Grid container>
-                    <Grid item xs={3}>
-                      <a
-                        target="_blank"
-                        href="https://apps.apple.com/vn/app/tix-%C4%91%E1%BA%B7t-v%C3%A9-nhanh-nh%E1%BA%A5t/id615186197"
-                      >
-                        <img src={fblogo} className={classes.footerPartner} />
-                      </a>
-                    </Grid>
-                    <Grid item xs={3}>
-                      <a
-                        target="_blank"
-                        href="https://play.google.com/store/apps/details?id=vn.com.vng.phim123"
-                      >
-                        <img src={zalologo} width="30" />
-                      </a>
-                    </Grid>
-                  </Grid>
-                </Typography>
+                </Grid>
               </Grid>
             </Grid>
-          </Grid>
+          </Hidden>
+          <Hidden mdUp>
+            <Grid item xs={12} sm={5} lg={4} className={classes.spacingWhenmd}>
+              <Grid container>
+                <Grid item xs={12}>
+                  <Typography className={classes.alignTextMdD}>
+                    <Grid container>
+                      <Grid item xs={6} sm={3}>
+                        <a
+                          target="_blank"
+                          href="https://apps.apple.com/vn/app/tix-%C4%91%E1%BA%B7t-v%C3%A9-nhanh-nh%E1%BA%A5t/id615186197"
+                        >
+                          <img src={fblogo} className={classes.footerPartner} />
+                        </a>
+                      </Grid>
+                      <Grid item xs={6} sm={3}>
+                        <a
+                          target="_blank"
+                          href="https://play.google.com/store/apps/details?id=vn.com.vng.phim123"
+                        >
+                          <img src={zalologo} width="30" />
+                        </a>
+                      </Grid>
+                    </Grid>
+                  </Typography>
+                </Grid>
+              </Grid>
+            </Grid>
+          </Hidden>
         </Grid>
+
         <Divider className={classes.divider} />
         <Typography className={classes.footerSpacing}>
           <Grid container>
-            <Grid item xs={2} className={classes.footerSpacingTop}>
+            <Grid
+              item
+              xs={12}
+              sm={3}
+              lg={2}
+              className={classes.footerSpacingTop}
+            >
               <img src={zionlogo} width="100" />
             </Grid>
-            <Grid item xs={8}>
+            <Grid item xs={12} sm={6} lg={8}>
               <Typography variant="h6" className={classes.footerTypograhyLabel}>
                 TIX – SẢN PHẨM CỦA CÔNG TY CỔ PHẦN ZION
               </Typography>
@@ -160,7 +216,13 @@ const Footer = () => {
                 Số Điện Thoại (Hotline): 1900 545 436
               </Typography>
             </Grid>
-            <Grid item xs={2} className={classes.footerSpacingTop}>
+            <Grid
+              item
+              xs={12}
+              sm={3}
+              lg={2}
+              className={classes.footerSpacingTop}
+            >
               <img src={bctlogo} width="100" />
             </Grid>
           </Grid>
