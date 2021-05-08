@@ -94,7 +94,7 @@ function AppHome() {
               animation="fade"
               indicators={false}
               navButtonsAlwaysInvisible={true}
-              autoPlay={false}
+              autoPlay={true}
               timeout={200}
             >
               {renderPhone()}

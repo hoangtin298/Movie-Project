@@ -55,7 +55,6 @@ function MovieList(props) {
   const theme = useTheme();
   const isMatchSm = useMediaQuery(theme.breakpoints.down("sm"));
   const isMatchXs = useMediaQuery(theme.breakpoints.down("xs"));
-  const isMatch1100 = useMediaQuery("(max-width:1100px)");
   const classes = useStyles();
   const [search, setSearch] = useState("");
   const numberOfElement = () => {
@@ -92,8 +91,8 @@ function MovieList(props) {
   const renderMovieGroup = (movieGroup) => {
     return movieGroup.map((item, index) => {
       return (
-        <Container maxWidth="md" className={classes.movieGroup}>
-          <Grid key={index} container spacing={3}>
+        <Container key={index} maxWidth="md" className={classes.movieGroup}>
+          <Grid container spacing={3}>
             {renderMovieList(item)}
           </Grid>
         </Container>
