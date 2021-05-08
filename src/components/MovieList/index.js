@@ -22,6 +22,7 @@ import SearchIcon from "@material-ui/icons/Search";
 import { useStyles } from "./style";
 import { CollectionsOutlined } from "@material-ui/icons";
 import { Alert } from "@material-ui/lab";
+import Detail from "../../containers/HomeTemplate/Detail";
 
 const chunkArray = (arr, size) =>
   Array.from({ length: Math.ceil(arr.length / size) }, (v, i) =>

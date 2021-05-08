@@ -1,6 +1,4 @@
-import React, { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { actGetCinemaListApi } from "./modules/action";
+import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Tabs from "@material-ui/core/Tabs";
 import Tab from "@material-ui/core/Tab";
@@ -34,9 +32,13 @@ const useStyles = makeStyles((theme) => ({
     flexGrow: 1,
     backgroundColor: theme.palette.background.paper,
     display: "flex",
+    padding: "0!important",
   },
   tabs: {
     borderRight: `1px solid ${theme.palette.divider}`,
+  },
+  noPadding: {
+    padding: "0!important",
   },
 }));
 
@@ -45,27 +47,19 @@ const renderCinemaLogo = (arrData) => {
     return (
       <Tab
         key={item.biDanh}
-        icon={<Avatar alt={item.biDanh} src={item.logo} />}
+        icon={<Avatar alt={item.tenHeThongRap} src={item.logo} />}
       />
     );
   });
 };
 
-function CinemaList() {
-  const dispatch = useDispatch();
-  const cinemaList = useSelector((state) => state.cinemaListReducer);
-
-  useEffect(() => {
-    dispatch(actGetCinemaListApi());
-  }, []);
-
-  const classes = useStyles();
+function MenuCinema(props) {
+  let { data } = props;
   const [value, setValue] = React.useState(0);
-
+  const classes = useStyles();
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
-
   return (
     <Container className={classes.root}>
       <Tabs
@@ -74,7 +68,7 @@ function CinemaList() {
         onChange={handleChange}
         className={classes.tabs}
       >
-        {cinemaList.data ? renderCinemaLogo(cinemaList.data) : null}
+        {data ? renderCinemaLogo(data) : null}
       </Tabs>
 
       <TabPanel value={value} index={0}>
@@ -101,5 +95,4 @@ function CinemaList() {
     </Container>
   );
 }
-
-export default CinemaList;
+export default MenuCinema;

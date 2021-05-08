@@ -13,6 +13,5 @@ export const rootReducer = combineReducers({
   movieListReducer,
   movieDetailReducer,
   cinemaListReducer,
-
   currentUserReducer,
 });

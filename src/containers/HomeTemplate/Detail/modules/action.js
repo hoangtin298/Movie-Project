@@ -5,7 +5,7 @@ export const actGetMovieDetailApi = (movieId) => {
   return (dispatch) => {
     dispatch(actGetMovieDetailRequest());
     axios({
-      url: `https://movie0706.cybersoft.edu.vn/api/QuanLyPhim/LayThongTinPhim?MaPhim=${movieId}`,
+      url: `https://movie0706.cybersoft.edu.vn/api/QuanLyRap/LayThongTinLichChieuPhim?MaPhim=${movieId}`,
       method: "GET",
     })
       .then((result) => {
