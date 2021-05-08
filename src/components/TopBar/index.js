@@ -8,7 +8,7 @@ import { Divider, Drawer, useTheme } from "@material-ui/core";
 import MenuIcon from "@material-ui/icons/Menu";
 import Logo from "../Logo";
 import MyGridContainer from "./MyGridContainer";
-// Start here
+
 const TopBar = (ComponentItems, ComponentAuth) => {
   const classes = useStyles();
   const theme = useTheme();
@@ -26,7 +26,7 @@ const TopBar = (ComponentItems, ComponentAuth) => {
           <Toolbar className={classes.toolBar}>
             <MyGridContainer justify="flex-start" spacing={2}>
               {/* Logo */}
-              <Grid item xs={6} lg={1}>
+              <Grid item xs={6} lg={3}>
                 <Logo className={classes.logo} />
               </Grid>
               {isMatch ? (
@@ -41,7 +41,7 @@ const TopBar = (ComponentItems, ComponentAuth) => {
               ) : (
                 <>
                   {setOpen(false)}
-                  <MyGridContainer className={classes.headData} item lg={8}>
+                  <MyGridContainer className={classes.headData} item lg={6}>
                     <ComponentItems className={classes.headDataItems} />
                   </MyGridContainer>
                   <MyGridContainer
