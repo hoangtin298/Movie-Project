@@ -1,6 +1,6 @@
-import React, { useEffect } from "react";
-import { Link as RouterLink, useLocation } from "react-router-dom";
-import PropTypes from "prop-types";
+import React from "react";
+import { Link as RouterLink } from "react-router-dom";
+import GroupIcon from "@material-ui/icons/Group";
 import {
   Avatar,
   Box,
@@ -16,12 +16,7 @@ import {
 import PersonAddIcon from "@material-ui/icons/PersonAdd";
 import BarChartIcon from "@material-ui/icons/BarChart";
 import NavItem from "./NavItem";
-
-const user = {
-  avatar: "/static/images/avatars/avatar_6.png",
-  jobTitle: "Senior Developer",
-  name: "Katarina Smith",
-};
+import { useSelector } from "react-redux";
 
 const items = [
   {
@@ -31,7 +26,7 @@ const items = [
   },
   {
     href: "/manage-user",
-    icon: PersonAddIcon,
+    icon: GroupIcon,
     title: "Manage User",
   },
 ];
@@ -55,20 +50,17 @@ const useStyles = makeStyles(() => ({
 const NavBarAdmin = ({ openDrawer, setOpenDrawer }) => {
   const classes = useStyles();
 
+  const user = useSelector((state) => state.currentUserReducer);
+
   const content = (
     <Box height="100%" display="flex" flexDirection="column">
       <Box alignItems="center" display="flex" flexDirection="column" p={2}>
-        <Avatar
-          className={classes.avatar}
-          component={RouterLink}
-          src={user.avatar}
-          to="/app/account"
-        />
+        <Avatar className={classes.avatar} component={RouterLink} />
         <Typography className={classes.name} color="textPrimary" variant="h5">
-          {user.name}
+          {user.taiKhoan}
         </Typography>
         <Typography color="textSecondary" variant="body2">
-          {user.jobTitle}
+          {user.hoTen}
         </Typography>
       </Box>
       <Divider />

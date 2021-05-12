@@ -26,7 +26,9 @@ const routeHome = [
     exact: false,
     path: "/sign-up",
     component: SignUp,
-
+  },
+  {
+    exact: false,
     path: "/purchase",
     component: Purchase,
   },

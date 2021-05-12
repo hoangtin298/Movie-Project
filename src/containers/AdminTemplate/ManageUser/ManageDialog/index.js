@@ -18,6 +18,9 @@ import { useForm } from "react-hook-form";
 import FormControl from "@material-ui/core/FormControl";
 import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
+import Swal from "sweetalert2";
+import { swalFailed, swalSuccess } from "../../../../utils";
+import { actGetUserPagingApi } from "../modules/action";
 
 const schema = yup.object().shape({
   hoTen: yup
@@ -95,7 +98,15 @@ const DialogActions = withStyles((theme) => ({
 }))(MuiDialogActions);
 
 export default function ManageDialog(props) {
-  const { openDialog, handleCloseDialog, modal } = props;
+  const {
+    openDialog,
+    setOpenDialog,
+    handleCloseDialog,
+    modal,
+    search,
+    page,
+    numberElementOfPage,
+  } = props;
 
   const [user, setUser] = useState({ ...props.modal.user });
 
@@ -109,6 +120,8 @@ export default function ManageDialog(props) {
   const accessToken = useSelector(
     (state) => state.currentUserReducer.accessToken
   );
+
+  const dispatch = useDispatch();
 
   useEffect(() => {
     setUser(props.modal.user);
@@ -135,10 +148,26 @@ export default function ManageDialog(props) {
       },
     })
       .then((result) => {
-        console.log(result.data);
+        setOpenDialog(false);
+        swalSuccess("Thêm thành công").then(() => {
+          {
+            search.trim() === ""
+              ? dispatch(
+                  actGetUserPagingApi(page.toString(), numberElementOfPage)
+                )
+              : dispatch(
+                  actGetUserPagingApi(
+                    page.toString(),
+                    numberElementOfPage,
+                    search
+                  )
+                );
+          }
+        });
       })
       .catch((error) => {
-        console.log(error.response.data);
+        setOpenDialog(false);
+        swalFailed(error);
       });
   };
 
@@ -153,10 +182,26 @@ export default function ManageDialog(props) {
       },
     })
       .then((result) => {
-        console.log(result.data);
+        setOpenDialog(false);
+        swalSuccess("Cập nhật thành công").then(() => {
+          {
+            search.trim() === ""
+              ? dispatch(
+                  actGetUserPagingApi(page.toString(), numberElementOfPage)
+                )
+              : dispatch(
+                  actGetUserPagingApi(
+                    page.toString(),
+                    numberElementOfPage,
+                    search
+                  )
+                );
+          }
+        });
       })
       .catch((error) => {
-        console.log(error.response.data);
+        setOpenDialog(false);
+        swalFailed(error);
       });
   };
 

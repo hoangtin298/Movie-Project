@@ -1,6 +1,7 @@
 import * as actionTypes from "./constant";
 import axios from "axios";
-import Swal from "sweetalert2";
+import { swalSuccess, swalFailed } from "../../../../utils/index";
+
 export const actSignUpApi = (userAccount) => {
   return (dispatch) => {
     dispatch(actSignUpRequest());
@@ -11,13 +12,7 @@ export const actSignUpApi = (userAccount) => {
     })
       .then((result) => {
         dispatch(actSignUpSuccess(result.data));
-        Swal.fire({
-          position: "center",
-          icon: "success",
-          title: "Đăng ký thành công",
-          showConfirmButton: false,
-          timer: 1500,
-        });
+        swalSuccess("Đăng ký thành công");
       })
       .catch((error) => {
         dispatch(actSignUpFailed(error));

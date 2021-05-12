@@ -55,6 +55,7 @@ function App() {
       <BrowserRouter>
         <Switch>
           {showLayoutAdmin(routeAdmin)}
+
           {showLayoutHome(routeHome)}
 
           {/* Không tìm ra trang nào */}

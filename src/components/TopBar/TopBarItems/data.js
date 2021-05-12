@@ -15,4 +15,8 @@ export const data = [
     name: "Ứng Dụng",
     id: "ungDung",
   },
+  {
+    name: "Dashboard",
+    id: "dashboard",
+  },
 ];
