@@ -1,6 +1,6 @@
 import * as actionTypes from "./constant";
 import axios from "axios";
-import Swal from "sweetalert2";
+import { swalSuccess } from "../../../../utils/index";
 
 export const actSignInApi = (userAccount, history) => {
   return (dispatch) => {
@@ -20,13 +20,7 @@ export const actSignInApi = (userAccount, history) => {
 
         dispatch(actSignInSuccess(result.data));
 
-        Swal.fire({
-          position: "center",
-          icon: "success",
-          title: "Đăng nhập thành công",
-          showConfirmButton: false,
-          timer: 1500,
-        }).then((result) => {
+        swalSuccess("Đăng nhập thành công").then((result) => {
           history.replace("/");
         });
       })

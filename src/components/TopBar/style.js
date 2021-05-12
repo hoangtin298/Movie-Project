@@ -31,6 +31,8 @@ export const useStyles = makeStyles((theme) => ({
     },
   },
   headDataItems: {
+    textDecoration: "none",
+    color: theme.palette.common.black,
     padding: theme.spacing(0, 4),
     cursor: "pointer",
     "&:hover": {

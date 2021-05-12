@@ -11,17 +11,24 @@ import EditIcon from "@material-ui/icons/Edit";
 import IconButton from "@material-ui/core/IconButton";
 import DeleteIcon from "@material-ui/icons/Delete";
 import { useDispatch, useSelector } from "react-redux";
-import { actDeleteUserApi, actGetUserPagingApi } from "./modules/action";
+import { actGetUserPagingApi } from "./modules/action";
 import { Pagination } from "@material-ui/lab";
 import { Button, Grid, InputBase, TableFooter } from "@material-ui/core";
 import SearchIcon from "@material-ui/icons/Search";
 import ManageDialog from "./ManageDialog";
 import axios from "axios";
+import { swalSuccess, swalFailed } from "../../../utils/index";
 
 const useStyles = makeStyles((theme) => ({
   root: {
     padding: theme.spacing(3),
     background: "rgb(244, 246, 248)",
+  },
+  rootAlert: {
+    width: "100%",
+    "& > * + *": {
+      marginTop: theme.spacing(2),
+    },
   },
   rootPagination: {
     "& > * + *": {
@@ -59,15 +66,6 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const numberElementOfPage = "8";
-
-const tableHeaders = [
-  { label: "Tài Khoản", key: "taiKhoan" },
-  { label: "Họ Tên", key: "hoTen" },
-  { label: "Email", key: "email" },
-  { label: "Số Điện Thoại", key: "soDt" },
-  { label: "Loại Người Dùng", key: "loaiNguoiDung" },
-  { label: "Chức Năng", key: "chucNang" },
-];
 
 export default function ManageUser() {
   const classes = useStyles();
@@ -175,32 +173,25 @@ export default function ManageUser() {
       },
     })
       .then((result) => {
-        console.log(result.data);
-        alert("Xoa thanh cong");
-        {
-          search.trim() === ""
-            ? dispatch(
-                actGetUserPagingApi(page.toString(), numberElementOfPage)
-              )
-            : dispatch(
-                actGetUserPagingApi(
-                  page.toString(),
-                  numberElementOfPage,
-                  search
+        swalSuccess(result.data).then(() => {
+          {
+            search.trim() === ""
+              ? dispatch(
+                  actGetUserPagingApi(page.toString(), numberElementOfPage)
                 )
-              );
-        }
+              : dispatch(
+                  actGetUserPagingApi(
+                    page.toString(),
+                    numberElementOfPage,
+                    search
+                  )
+                );
+          }
+        });
       })
       .catch((error) => {
-        console.log(error);
-        alert("Xoa that bai");
+        swalFailed(error);
       });
-  };
-
-  const renderTableHeader = () => {
-    return tableHeaders.map((item, index) => {
-      return <TableCell align="left">{item.label}</TableCell>;
-    });
   };
 
   const renderUserPaging = () => {
@@ -268,13 +259,12 @@ export default function ManageUser() {
         <Table className={classes.table} aria-label="simple table">
           <TableHead>
             <TableRow>
-              {/* <TableCell align="left">Tài Khoản</TableCell>
+              <TableCell align="left">Tài Khoản</TableCell>
               <TableCell align="left">Họ Tên</TableCell>
               <TableCell align="left">Email</TableCell>
               <TableCell align="left">Số Điện Thoại</TableCell>
               <TableCell align="left">Loại Người Dùng</TableCell>
-              <TableCell align="center">Chức năng</TableCell> */}
-              {renderTableHeader()}
+              <TableCell align="center">Chức năng</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>{userPaging.data ? renderUserPaging() : null}</TableBody>
@@ -295,7 +285,11 @@ export default function ManageUser() {
       {/* Dialog */}
 
       <ManageDialog
+        search={search}
+        page={page}
+        numberElementOfPage={numberElementOfPage}
         openDialog={openDialog}
+        setOpenDialog={setOpenDialog}
         handleCloseDialog={handleCloseDialog}
         modal={modal}
       />

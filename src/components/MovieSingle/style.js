@@ -55,6 +55,24 @@ export const useStyles = makeStyles((theme) => ({
     visibility: "hidden",
     transition: "all 0.3s ",
   },
+  buttonPlay: {
+    position: "absolute",
+    top: "50%",
+    left: "50%",
+    transform: "translate(-50%,-50%)",
+    zIndex: 3,
+    border: "none",
+    background: "transparent",
+    width: "60px",
+    height: "60px",
+    "&:hover": {
+      opacity: 0.7,
+      background: "transparent",
+    },
+  },
+  imgButtonPlay: {
+    width: "100%",
+  },
   info: {
     position: "relative",
     display: "block",
