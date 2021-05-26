@@ -125,6 +125,7 @@ export default function ManageUser() {
 
   //Pagination
   const handleChange = (event, value) => {
+    event.preventDefault();
     setPage(value);
     {
       search === ""
@@ -275,7 +276,6 @@ export default function ManageUser() {
         <div className={classes.rootPagination}>
           <Pagination
             color="primary"
-            size="small"
             count={userPaging.data.totalPages - 1}
             page={page}
             onChange={handleChange}

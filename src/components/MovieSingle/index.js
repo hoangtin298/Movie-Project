@@ -79,6 +79,7 @@ function MovieSingle(props) {
       <div>
         <ModalVideo
           channel="youtube"
+          autoplay="1"
           isOpen={isOpenModal}
           videoId={trailerString}
           onClose={() => setOpenModal(false)}

@@ -89,9 +89,6 @@ function MenuCinema(props) {
       <TabPanel value={value} index={5}>
         Item Six
       </TabPanel>
-      <TabPanel value={value} index={6}>
-        Item Seven
-      </TabPanel>
     </Container>
   );
 }
