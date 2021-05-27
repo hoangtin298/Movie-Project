@@ -31,6 +31,7 @@ const Home = () => {
       <Container
         maxWidth="md"
         className={classes.homeCinemaComplex}
+        id="cumRap"
       ></Container>
       <CinemaList />
       <AppHome />
