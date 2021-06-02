@@ -6,6 +6,7 @@ export const useStyles = makeStyles((theme) => ({
     display: "flex",
     flexDirection: "column",
     alignItems: "center",
+    padding: theme.spacing(2, 0),
   },
   avatar: {
     margin: theme.spacing(1),
@@ -17,5 +18,9 @@ export const useStyles = makeStyles((theme) => ({
   },
   submit: {
     margin: theme.spacing(3, 0, 2),
+  },
+  formContainer: {
+    backgroundColor: theme.palette.common.white,
+    borderRadius: "4px",
   },
 }));

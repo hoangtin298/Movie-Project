@@ -14,10 +14,16 @@ function TopBarAuth(props) {
   const renderUser = () => {
     return (
       <>
-        <Link justify="flex-end" item lg={6} className={classes.headAuthItems}>
+        <Link
+          to="/account"
+          justify="flex-end"
+          item
+          lg={6}
+          className={classes.headAuthItems}
+        >
           <AccountCircleIcon fontSize="large" className={classes.authIcon} />
           <MyTypography className={classes.overflowEllipis}>
-            {currentUser.email}
+            {currentUser.taiKhoan}
           </MyTypography>
         </Link>
 

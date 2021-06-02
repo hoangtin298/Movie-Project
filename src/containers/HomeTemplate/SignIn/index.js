@@ -55,7 +55,7 @@ const SignIn = () => {
   };
 
   return (
-    <Container component="main" maxWidth="xs">
+    <Container component="main" maxWidth="xs" className={classes.formContainer}>
       <CssBaseline />
       <div className={classes.paper}>
         <Avatar className={classes.avatar}></Avatar>
@@ -76,7 +76,6 @@ const SignIn = () => {
             label="Tài Khoản"
             name="taiKhoan"
             autoComplete="taiKhoan"
-            // autoFocus
             inputRef={register}
             error={!!errors.taiKhoan}
             helperText={errors?.taiKhoan?.message}
@@ -111,12 +110,7 @@ const SignIn = () => {
           />
           <FormControlLabel
             control={
-              <Checkbox
-                name="remember"
-                color="primary"
-                // inputRef={register}
-                defaultValue={false}
-              />
+              <Checkbox name="remember" color="primary" defaultValue={false} />
             }
             label="Nhớ tài khoản"
           />

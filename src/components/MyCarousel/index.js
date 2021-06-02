@@ -80,7 +80,7 @@ function MyCarousel(props) {
     <div className={classes.carousel}>
       <Carousel
         animation="slide"
-        autoPlay={false}
+        autoPlay={true}
         navButtonsAlwaysVisible={true}
         NextIcon={<ArrowForwardIosIcon className={classes.navButton} />}
         PrevIcon={<ArrowBackIosIcon className={classes.navButton} />}

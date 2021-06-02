@@ -7,7 +7,6 @@ import TopBarAdmin from "../../components/TopBarAdmin";
 const useStyles = makeStyles((theme) => ({
   layout: {
     paddingLeft: "256px",
-
     [theme.breakpoints.down("md")]: {
       paddingLeft: 0,
     },

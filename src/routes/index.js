@@ -5,6 +5,8 @@ import Detail from "../containers/HomeTemplate/Detail";
 import Purchase from "../containers/HomeTemplate/Purchase";
 import Home from "../containers/HomeTemplate/Home";
 import ManageUser from "../containers/AdminTemplate/ManageUser";
+import Account from "../containers/HomeTemplate/Account";
+import ManageMovie from "../containers/AdminTemplate/ManageMovie";
 
 const routeHome = [
   {
@@ -32,6 +34,11 @@ const routeHome = [
     path: "/purchase",
     component: Purchase,
   },
+  {
+    exact: false,
+    path: "/account",
+    component: Account,
+  },
 ];
 
 const routeAdmin = [
@@ -44,6 +51,11 @@ const routeAdmin = [
     exact: false,
     path: "/manage-user",
     component: ManageUser,
+  },
+  {
+    exact: false,
+    path: "/manage-movie",
+    component: ManageMovie,
   },
 ];
 
