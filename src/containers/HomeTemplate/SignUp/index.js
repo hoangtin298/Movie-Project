@@ -58,7 +58,7 @@ const SignUp = () => {
     event.preventDefault();
   };
   return (
-    <Container component="main" maxWidth="xs">
+    <Container component="main" maxWidth="xs" className={classes.formContainer}>
       <CssBaseline />
       <div className={classes.paper}>
         <Avatar className={classes.avatar}>

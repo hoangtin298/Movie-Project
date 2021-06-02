@@ -5,7 +5,7 @@ import MovieList from "../../../components/MovieList";
 
 import Footer from "../../../components/Footer";
 
-import { Container, Hidden, makeStyles } from "@material-ui/core";
+import { Container, CssBaseline, Hidden, makeStyles } from "@material-ui/core";
 import AppHome from "../../../components/AppHome";
 import BackNews from "../../../assets/back-news.png";
 
@@ -28,12 +28,14 @@ const Home = () => {
         <MyCarousel />
       </Hidden>
       <MovieList />
-      <Container
-        maxWidth="md"
-        className={classes.homeCinemaComplex}
-        id="cumRap"
-      ></Container>
-      <CinemaList />
+      <Hidden smDown>
+        <Container
+          maxWidth="md"
+          className={classes.homeCinemaComplex}
+          id="cumRap"
+        ></Container>
+        <CinemaList />
+      </Hidden>
       <AppHome />
       <Footer />
     </>
