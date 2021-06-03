@@ -9,6 +9,8 @@ import { movieShowtimesReducer } from "../containers/HomeTemplate/Purchase/modul
 import { userPagingReducer } from "../containers/AdminTemplate/ManageUser/modules/reducer";
 
 import { currentUserReducer } from "./currentUser";
+import { moviePagingReducer } from "../containers/AdminTemplate/ManageMovie/modules/reducer";
+import { accountReducer } from "../containers/HomeTemplate/Account/modules/reducer";
 export const rootReducer = combineReducers({
   signInReducer,
   signUpReducer,
@@ -21,7 +23,7 @@ export const rootReducer = combineReducers({
   userPagingReducer,
 
   currentUserReducer,
-  // accountReducer,
+  accountReducer,
 
-  // moviePagingReducer,
+  moviePagingReducer,
 });

@@ -93,6 +93,7 @@ export const useStyles = makeStyles((theme) => ({
     textAlign: "center",
     padding: theme.spacing(0.9, 3),
     backgroundColor: theme.palette.primary.main,
+    cursor: "pointer",
     "&:hover": {
       backgroundColor: theme.palette.primary.bloodRed,
     },

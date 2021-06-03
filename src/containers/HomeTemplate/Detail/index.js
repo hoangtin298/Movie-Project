@@ -14,7 +14,7 @@ import { actGetMovieDetailApi } from "./modules/action";
 import { useStyles } from "./style";
 import { Rating } from "@material-ui/lab";
 import banner from "../../../assets/banner-img.png";
-import { Link } from "react-router-dom";
+import { Link } from "react-scroll";
 import theme from "../../../theme/index";
 import moment from "moment";
 import MenuCinema from "../../../components/MenuCinema";
@@ -61,7 +61,14 @@ function Detail(props) {
           </Typography>
         </Grid>
         <Grid item xs={12} style={{ marginTop: "25px" }}>
-          <Link to={""} className={classes.detail__bticket}>
+          <Link
+            to="cinemaList"
+            smooth="true"
+            duration={1000}
+            spy={true}
+            offset={-50}
+            className={classes.detail__bticket}
+          >
             Mua vé
           </Link>
         </Grid>
@@ -225,6 +232,7 @@ function Detail(props) {
                     marginTop: "40px",
                     height: "720px",
                   }}
+                  id="cinemaList"
                 >
                   <MenuCinema data={movieDetail.data.heThongRapChieu} />
                 </Grid>
