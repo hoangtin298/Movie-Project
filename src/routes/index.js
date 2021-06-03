@@ -29,7 +29,7 @@ const routeHome = [
   },
   {
     exact: false,
-    path: "/purchase",
+    path: "/purchase/:maLichChieu",
     component: Purchase,
   },
 ];

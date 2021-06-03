@@ -3,10 +3,11 @@ import {
   Button,
   CircularProgress,
   Container,
+  Fab,
   Grid,
   Typography,
 } from "@material-ui/core";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import Spinner from "react-spinner-material";
 import { useDispatch, useSelector } from "react-redux";
 import { actGetMovieDetailApi } from "./modules/action";
@@ -17,6 +18,9 @@ import { Link } from "react-router-dom";
 import theme from "../../../theme/index";
 import moment from "moment";
 import MenuCinema from "../../../components/MenuCinema";
+import imgButtonPlay from "../../../assets/play-video.png";
+import ModalVideo from "react-modal-video";
+import "react-modal-video/css/modal-video.min.css";
 function Detail(props) {
   const renderLoading = () => {
     return (
@@ -38,6 +42,7 @@ function Detail(props) {
       </div>
     );
   };
+
   const renderThongTinPhim = (data) => {
     return (
       <Grid container className={classes.detail__filmInfo} spacing={1}>
@@ -56,7 +61,7 @@ function Detail(props) {
           </Typography>
         </Grid>
         <Grid item xs={12} style={{ marginTop: "25px" }}>
-          <Link to={"/purchase"} className={classes.detail__bticket}>
+          <Link to={""} className={classes.detail__bticket}>
             Mua vé
           </Link>
         </Grid>
@@ -81,6 +86,25 @@ function Detail(props) {
               value={data.danhGia * 10}
               className={classes.progessBar}
             />
+            <Box
+              top={0}
+              left={0}
+              bottom={0}
+              right={0}
+              position="absolute"
+              display="flex"
+              alignItems="center"
+              justifyContent="center"
+              className={classes.progressBarBg}
+            >
+              <CircularProgress
+                variant="determinate"
+                value={100}
+                style={{ color: "#3a3a3a" }}
+                className={classes.progessBar}
+              />
+            </Box>
+
             <Box
               top={0}
               left={0}
@@ -119,13 +143,26 @@ function Detail(props) {
     let movieId = props.match.params.maPhim;
     dispatch(actGetMovieDetailApi(movieId));
   }, []);
+  const [isOpenModal, setOpenModal] = useState(false);
+  const [trailer, setTrailer] = useState("");
+  const handleTrailerString = (trailerString) => {
+    trailerString = trailerString.replace(
+      "https://www.youtube.com/watch?v=",
+      ""
+    );
+    trailerString = trailerString.replace("https://www.youtube.com/embed/", "");
+    trailerString = trailerString.replace("https://youtu.be/", "");
+    trailerString = trailerString.trim();
+    return trailerString;
+  };
+
   return (
     <Container
       maxWidth="xl"
       style={{
         position: "relative",
         backgroundColor: "#0a2029",
-        height: "900px",
+        height: "1250px",
       }}
     >
       {movieDetail.loading ? (
@@ -147,13 +184,33 @@ function Detail(props) {
           {movieDetail.data ? (
             <Container maxWidth="md" className={classes.detail__shiftCenter}>
               <Grid container spacing={4}>
-                <Grid item xs={3}>
+                <Grid item xs={3} className={classes.film}>
                   <div
                     style={{
                       backgroundImage: `url(${movieDetail.data.hinhAnh}), url(https://tix.vn/app/assets/img/default-film.webp)`,
                     }}
                     className={classes.detail__filmImg}
-                  ></div>
+                  >
+                    {/* Thumbnail when hover */}
+                    <div className={classes.hoverThumbnail}>
+                      <Fab
+                        className={classes.buttonPlay}
+                        onClick={(e) => {
+                          e.preventDefault();
+                          setOpenModal(true);
+                          setTrailer(
+                            handleTrailerString(movieDetail.data.trailer)
+                          );
+                        }}
+                      >
+                        <img
+                          src={imgButtonPlay}
+                          alt="video-button"
+                          className={classes.imgButtonPlay}
+                        />
+                      </Fab>
+                    </div>
+                  </div>
                 </Grid>
                 <Grid item xs={5} className={classes.colorWhite}>
                   {renderThongTinPhim(movieDetail.data)}
@@ -161,7 +218,14 @@ function Detail(props) {
                 <Grid item xs={4}>
                   {renderDanhGiaPhim(movieDetail.data)}
                 </Grid>
-                <Grid item xs={12} style={{ marginTop: "40px" }}>
+                <Grid
+                  item
+                  xs={12}
+                  style={{
+                    marginTop: "40px",
+                    height: "720px",
+                  }}
+                >
                   <MenuCinema data={movieDetail.data.heThongRapChieu} />
                 </Grid>
               </Grid>
@@ -169,6 +233,15 @@ function Detail(props) {
           ) : null}
         </div>
       )}
+      <div>
+        <ModalVideo
+          channel="youtube"
+          autoplay="1"
+          isOpen={isOpenModal}
+          videoId={trailer}
+          onClose={() => setOpenModal(false)}
+        />
+      </div>
     </Container>
   );
 }
