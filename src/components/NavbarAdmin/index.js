@@ -13,10 +13,10 @@ import {
   makeStyles,
 } from "@material-ui/core";
 
-import PersonAddIcon from "@material-ui/icons/PersonAdd";
 import BarChartIcon from "@material-ui/icons/BarChart";
 import NavItem from "./NavItem";
 import { useSelector } from "react-redux";
+import TheatersIcon from "@material-ui/icons/Theaters";
 
 const items = [
   {
@@ -27,7 +27,12 @@ const items = [
   {
     href: "/manage-user",
     icon: GroupIcon,
-    title: "Manage User",
+    title: "Quản lí người dùng",
+  },
+  {
+    href: "/manage-movie",
+    icon: TheatersIcon,
+    title: "Quản lí phim",
   },
 ];
 
@@ -55,7 +60,7 @@ const NavBarAdmin = ({ openDrawer, setOpenDrawer }) => {
   const content = (
     <Box height="100%" display="flex" flexDirection="column">
       <Box alignItems="center" display="flex" flexDirection="column" p={2}>
-        <Avatar className={classes.avatar} component={RouterLink} />
+        <Avatar className={classes.avatar} />
         <Typography className={classes.name} color="textPrimary" variant="h5">
           {user.taiKhoan}
         </Typography>

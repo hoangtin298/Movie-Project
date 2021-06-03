@@ -50,7 +50,7 @@ const NavItem = ({ className, href, icon: Icon, title, ...rest }) => {
         component={NavLink}
         to={href}
       >
-        {Icon && <Icon className={classes.icon} size="20" />}
+        {Icon && <Icon className={classes.icon} fontSize="default" />}
         <span className={classes.title}>{title}</span>
       </Button>
     </ListItem>

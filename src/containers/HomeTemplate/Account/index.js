@@ -1,25 +1,28 @@
-import React, { useEffect, useState } from "react";
-import { makeStyles, withStyles } from "@material-ui/core/styles";
-import Button from "@material-ui/core/Button";
-import Dialog from "@material-ui/core/Dialog";
-import MuiDialogTitle from "@material-ui/core/DialogTitle";
-import MuiDialogContent from "@material-ui/core/DialogContent";
-import MuiDialogActions from "@material-ui/core/DialogActions";
-import IconButton from "@material-ui/core/IconButton";
-import CloseIcon from "@material-ui/icons/Close";
-import Typography from "@material-ui/core/Typography";
-import { Visibility, VisibilityOff } from "@material-ui/icons";
-import TextField from "@material-ui/core/TextField";
-import Grid from "@material-ui/core/Grid";
 import { yupResolver } from "@hookform/resolvers/yup";
-import * as yup from "yup";
-import { InputAdornment, InputLabel, Select } from "@material-ui/core";
-import { useForm } from "react-hook-form";
-import FormControl from "@material-ui/core/FormControl";
-import { useDispatch, useSelector } from "react-redux";
+import {
+  FormControl,
+  Grid,
+  IconButton,
+  InputAdornment,
+  InputLabel,
+  makeStyles,
+  CssBaseline,
+  Select,
+  TextField,
+  Container,
+  Typography,
+  Divider,
+} from "@material-ui/core";
+import { Visibility, VisibilityOff } from "@material-ui/icons";
 import axios from "axios";
-import { swalFailed, swalSuccess } from "../../../../utils";
-import { actGetUserPagingApi } from "../modules/action";
+import React, { useEffect, useState } from "react";
+import { useForm } from "react-hook-form";
+import { useDispatch, useSelector } from "react-redux";
+import * as yup from "yup";
+import { actGetCurrentAccountApi } from "./modules/action";
+import Button from "@material-ui/core/Button";
+import { Redirect } from "react-router";
+import { swalFailed, swalSuccess } from "../../../utils";
 
 const schema = yup.object().shape({
   hoTen: yup
@@ -40,9 +43,16 @@ const schema = yup.object().shape({
 });
 
 const useStyles = makeStyles((theme) => ({
+  root: {
+    padding: theme.spacing(3),
+  },
   form: {
     width: "100%", // Fix IE 11 issue.
     marginTop: theme.spacing(1),
+  },
+  formContainer: {
+    backgroundColor: theme.palette.common.white,
+    borderRadius: "4px",
   },
   formControl: {
     width: "100%",
@@ -50,81 +60,47 @@ const useStyles = makeStyles((theme) => ({
   button: {
     marginRight: "8px",
   },
+  buttonContainer: {
+    display: "flex",
+    justifyContent: "flex-end",
+  },
+  headerText: {
+    fontWeight: 600,
+    marginBottom: theme.spacing(1),
+  },
 }));
 
-const styles = (theme) => ({
-  root: {
-    margin: 0,
-    padding: theme.spacing(2),
-  },
-  closeButton: {
-    position: "absolute",
-    right: theme.spacing(1),
-    top: theme.spacing(1),
-    color: theme.palette.grey[500],
-  },
-});
-
-const DialogTitle = withStyles(styles)((props) => {
-  const { children, classes, onClose, ...other } = props;
-  return (
-    <MuiDialogTitle disableTypography className={classes.root} {...other}>
-      <Typography variant="h6">{children}</Typography>
-      {onClose ? (
-        <IconButton
-          aria-label="close"
-          className={classes.closeButton}
-          onClick={onClose}
-        >
-          <CloseIcon />
-        </IconButton>
-      ) : null}
-    </MuiDialogTitle>
-  );
-});
-
-const DialogContent = withStyles((theme) => ({
-  root: {
-    padding: theme.spacing(2),
-  },
-}))(MuiDialogContent);
-
-const DialogActions = withStyles((theme) => ({
-  root: {
-    margin: 0,
-    padding: theme.spacing(1),
-  },
-}))(MuiDialogActions);
-
-export default function ManageDialog(props) {
-  const {
-    openDialog,
-    setOpenDialog,
-    handleCloseDialog,
-    modal,
-    search,
-    page,
-    numberElementOfPage,
-  } = props;
-
-  const [user, setUser] = useState({ ...props.modal.user });
-
+export default function Account() {
   const classes = useStyles();
+  const dispatch = useDispatch();
   const { register, handleSubmit, errors } = useForm({
     mode: "onBlur",
     resolver: yupResolver(schema),
   });
-  const [showPassword, setShowPassword] = useState(false);
-
-  const accessToken = useSelector(
-    (state) => state.currentUserReducer.accessToken
-  );
-
-  const dispatch = useDispatch();
 
   useEffect(() => {
-    setUser(props.modal.user);
-  }, [props.modal.user]);
+    if (localStorage.getItem("currentUser")) {
+      dispatch(
+        actGetCurrentAccountApi(
+          JSON.parse(localStorage.getItem("currentUser")).hoTen
+        )
+      );
+    }
+  }, []);
+
+  const [showPassword, setShowPassword] = useState(false);
+
+  const currentUser = useSelector((state) => state.accountReducer);
+
+  const [user, setUser] = useState(currentUser.data?.[0]);
+
+  useEffect(() => {
+    setUser(currentUser.data?.[0]);
+  }, [currentUser]);
+
+  if (!localStorage.getItem("currentUser")) {
+    return <Redirect to="/" />;
+  }
 
   const handleChange = (event) => {
     const name = event.target.name;
@@ -136,74 +112,6 @@ export default function ManageDialog(props) {
     });
   };
 
-  const onAddSubmit = (data) => {
-    data["maNhom"] = "GP09";
-    axios({
-      url: `https://movie0706.cybersoft.edu.vn/api/QuanLyNguoiDung/ThemNguoiDung`,
-      method: "POST",
-      data,
-      headers: {
-        Authorization: `Bearer ${accessToken}`,
-      },
-    })
-      .then((result) => {
-        setOpenDialog(false);
-        swalSuccess("Thêm thành công").then(() => {
-          {
-            search.trim() === ""
-              ? dispatch(
-                  actGetUserPagingApi(page.toString(), numberElementOfPage)
-                )
-              : dispatch(
-                  actGetUserPagingApi(
-                    page.toString(),
-                    numberElementOfPage,
-                    search
-                  )
-                );
-          }
-        });
-      })
-      .catch((error) => {
-        setOpenDialog(false);
-        swalFailed(error);
-      });
-  };
-
-  const onUpdateSubmit = (data) => {
-    data["maNhom"] = "GP09";
-    axios({
-      url: `https://movie0706.cybersoft.edu.vn/api/QuanLyNguoiDung/CapNhatThongTinNguoiDung`,
-      method: "PUT",
-      data,
-      headers: {
-        Authorization: `Bearer ${accessToken}`,
-      },
-    })
-      .then((result) => {
-        setOpenDialog(false);
-        swalSuccess("Cập nhật thành công").then(() => {
-          {
-            search.trim() === ""
-              ? dispatch(
-                  actGetUserPagingApi(page.toString(), numberElementOfPage)
-                )
-              : dispatch(
-                  actGetUserPagingApi(
-                    page.toString(),
-                    numberElementOfPage,
-                    search
-                  )
-                );
-          }
-        });
-      })
-      .catch((error) => {
-        setOpenDialog(false);
-        swalFailed(error);
-      });
-  };
-
   const handleClickShowPassword = () => {
     setShowPassword(!showPassword);
   };
@@ -212,21 +120,47 @@ export default function ManageDialog(props) {
     event.preventDefault();
   };
 
+  const accessToken = JSON.parse(
+    localStorage.getItem("currentUser")
+  ).accessToken;
+
+  const onSaveSubmit = (user) => {
+    user["maNhom"] = "GP09";
+    axios({
+      url: `https://movie0706.cybersoft.edu.vn/api/QuanLyNguoiDung/CapNhatThongTinNguoiDung`,
+      method: "PUT",
+      data: user,
+      headers: {
+        Authorization: `Bearer ${accessToken}`,
+      },
+    })
+      .then((result) => {
+        swalSuccess("Cập nhật thành công");
+      })
+      .catch((error) => {
+        swalFailed(error);
+      });
+  };
+
   return (
-    <div>
-      <Dialog maxWidth="sm" onClose={handleCloseDialog} open={openDialog}>
-        <DialogTitle onClose={handleCloseDialog}>
-          <Typography
-            color={modal.id === "them" ? "primary" : "secondary"}
-            variant="h3"
-          >
-            {modal.title}
-          </Typography>
-        </DialogTitle>
-        <DialogContent dividers>
+    <div className={classes.root}>
+      <Container component="main" maxWidth="md">
+        <CssBaseline />
+        {user && (
           <form className={classes.form} noValidate>
-            <Grid container spacing={2}>
+            <Grid className={classes.formContainer} container spacing={3}>
               <Grid item xs={12}>
+                <Typography variant="h1" className={classes.headerText}>
+                  Cài đặt tài khoản chung
+                </Typography>
+                <Typography variant="h4">
+                  Thông tin có thể được thay đổi
+                </Typography>
+              </Grid>
+              <Grid item xs={12}>
+                <Divider />
+              </Grid>
+              <Grid item xs={12} md={6}>
                 <TextField
                   variant="outlined"
                   required
@@ -239,10 +173,9 @@ export default function ManageDialog(props) {
                   error={!!errors.taiKhoan}
                   helperText={errors?.taiKhoan?.message}
                   value={user.taiKhoan}
-                  onChange={modal.id === "them" ? handleChange : null}
                 />
               </Grid>
-              <Grid item xs={12}>
+              <Grid item xs={12} md={6}>
                 <TextField
                   variant="outlined"
                   required
@@ -273,7 +206,7 @@ export default function ManageDialog(props) {
                   onChange={handleChange}
                 />
               </Grid>
-              <Grid item xs={12}>
+              <Grid item xs={12} md={6}>
                 <TextField
                   variant="outlined"
                   required
@@ -290,7 +223,7 @@ export default function ManageDialog(props) {
                 />
               </Grid>
 
-              <Grid item xs={12}>
+              <Grid item xs={12} md={6}>
                 <TextField
                   variant="outlined"
                   required
@@ -306,7 +239,7 @@ export default function ManageDialog(props) {
                   onChange={handleChange}
                 />
               </Grid>
-              <Grid item xs={12}>
+              <Grid item xs={12} md={6}>
                 <TextField
                   variant="outlined"
                   required
@@ -322,7 +255,8 @@ export default function ManageDialog(props) {
                   onChange={handleChange}
                 />
               </Grid>
-              <Grid item xs={12}>
+
+              <Grid item xs={12} md={6}>
                 <FormControl variant="outlined" className={classes.formControl}>
                   <InputLabel htmlFor="outlined-age-native-simple">
                     Mã Loại Người Dùng
@@ -330,7 +264,6 @@ export default function ManageDialog(props) {
                   <Select
                     native
                     value={user.maLoaiNguoiDung}
-                    onChange={handleChange}
                     label="Mã Loại Người Dùng"
                     inputProps={{
                       name: "maLoaiNguoiDung",
@@ -343,25 +276,22 @@ export default function ManageDialog(props) {
                   </Select>
                 </FormControl>
               </Grid>
+              <Grid item xs={12}>
+                <Divider />
+              </Grid>
+              <Grid className={classes.buttonContainer} item xs={12}>
+                <Button
+                  variant="contained"
+                  color="primary"
+                  onClick={handleSubmit(onSaveSubmit)}
+                >
+                  Cập Nhật
+                </Button>
+              </Grid>
             </Grid>
           </form>
-        </DialogContent>
-        <DialogActions>
-          <Button
-            className={classes.button}
-            variant="contained"
-            onClick={
-              modal.id === "them"
-                ? handleSubmit(onAddSubmit)
-                : handleSubmit(onUpdateSubmit)
-            }
-            autoFocus
-            color={modal.id === "them" ? "primary" : "secondary"}
-          >
-            {modal.button}
-          </Button>
-        </DialogActions>
-      </Dialog>
+        )}
+      </Container>
     </div>
   );
 }

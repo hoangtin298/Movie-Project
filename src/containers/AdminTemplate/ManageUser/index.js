@@ -13,7 +13,13 @@ import DeleteIcon from "@material-ui/icons/Delete";
 import { useDispatch, useSelector } from "react-redux";
 import { actGetUserPagingApi } from "./modules/action";
 import { Pagination } from "@material-ui/lab";
-import { Button, Grid, InputBase, TableFooter } from "@material-ui/core";
+import {
+  Button,
+  CssBaseline,
+  Grid,
+  InputBase,
+  TableFooter,
+} from "@material-ui/core";
 import SearchIcon from "@material-ui/icons/Search";
 import ManageDialog from "./ManageDialog";
 import axios from "axios";
@@ -22,7 +28,6 @@ import { swalSuccess, swalFailed } from "../../../utils/index";
 const useStyles = makeStyles((theme) => ({
   root: {
     padding: theme.spacing(3),
-    background: "rgb(244, 246, 248)",
   },
   rootAlert: {
     width: "100%",
@@ -231,6 +236,7 @@ export default function ManageUser() {
 
   return (
     <div className={classes.root}>
+      <CssBaseline />
       <Grid container>
         <Grid container item xs={12} justify="flex-end">
           <Button
@@ -260,11 +266,11 @@ export default function ManageUser() {
         <Table className={classes.table} aria-label="simple table">
           <TableHead>
             <TableRow>
-              <TableCell align="left">Tài Khoản</TableCell>
-              <TableCell align="left">Họ Tên</TableCell>
+              <TableCell align="left">Tài khoản</TableCell>
+              <TableCell align="left">Họ tên</TableCell>
               <TableCell align="left">Email</TableCell>
-              <TableCell align="left">Số Điện Thoại</TableCell>
-              <TableCell align="left">Loại Người Dùng</TableCell>
+              <TableCell align="left">Số điện thoại</TableCell>
+              <TableCell align="left">Loại người dùng</TableCell>
               <TableCell align="center">Chức năng</TableCell>
             </TableRow>
           </TableHead>
