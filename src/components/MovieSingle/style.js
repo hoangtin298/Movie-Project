@@ -86,6 +86,8 @@ export const useStyles = makeStyles((theme) => ({
     },
   },
   tenPhim: {
+    fontSize: "18px",
+    fontWeight: 500,
     height: "42px",
     maxHeight: "42px",
     lineHeight: "22px",
@@ -101,13 +103,24 @@ export const useStyles = makeStyles((theme) => ({
     color: theme.palette.common.black,
 
     [theme.breakpoints.down("xs")]: {
-      height: "20px",
+      height: "26px",
       display: "-webkit-box",
       WebkitLineClamp: "1",
       WebkitBoxOrient: "vertical",
       textOverflow: "ellipsis",
       overflow: "hidden",
     },
+  },
+  limitAge: {
+    display: "inline-block",
+    fontSize: "16px",
+    background: theme.palette.primary.main,
+    borderRadius: "4px",
+    padding: "0 5px",
+    color: theme.palette.common.white,
+    minWidth: "33px",
+    textAlign: "center",
+    marginRight: theme.spacing(1),
   },
   moTa: {
     display: "-webkit-box",

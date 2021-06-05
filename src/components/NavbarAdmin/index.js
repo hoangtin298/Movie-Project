@@ -12,7 +12,7 @@ import {
   Typography,
   makeStyles,
 } from "@material-ui/core";
-
+import userAvatar from "../../assets/avatarTix.jpg";
 import BarChartIcon from "@material-ui/icons/BarChart";
 import NavItem from "./NavItem";
 import { useSelector } from "react-redux";
@@ -36,7 +36,7 @@ const items = [
   },
 ];
 
-const useStyles = makeStyles(() => ({
+const useStyles = makeStyles((theme) => ({
   mobileDrawer: {
     width: 256,
   },
@@ -49,6 +49,7 @@ const useStyles = makeStyles(() => ({
     cursor: "pointer",
     width: 64,
     height: 64,
+    marginBottom: theme.spacing(1),
   },
 }));
 
@@ -60,12 +61,17 @@ const NavBarAdmin = ({ openDrawer, setOpenDrawer }) => {
   const content = (
     <Box height="100%" display="flex" flexDirection="column">
       <Box alignItems="center" display="flex" flexDirection="column" p={2}>
-        <Avatar className={classes.avatar} />
-        <Typography className={classes.name} color="textPrimary" variant="h5">
+        <Avatar alt="Avatar" className={classes.avatar} src={userAvatar} />
+        <Typography
+          gutterBottom
+          className={classes.name}
+          color="textPrimary"
+          variant="h4"
+        >
           {user.taiKhoan}
         </Typography>
         <Typography color="textSecondary" variant="body2">
-          {user.hoTen}
+          {user.email}
         </Typography>
       </Box>
       <Divider />

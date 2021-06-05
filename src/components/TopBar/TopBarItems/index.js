@@ -20,7 +20,7 @@ function TopBarItems(props) {
     if (item.id === "dashboard") {
       return (
         <RouteLink className={classes.headDataItems} to={item.id}>
-          <MyTypography>{item.name}</MyTypography>
+          <MyTypography variant="h4">{item.name}</MyTypography>
         </RouteLink>
       );
     }
@@ -35,7 +35,7 @@ function TopBarItems(props) {
         offset={-50}
         spy={true}
       >
-        <MyTypography>{item.name}</MyTypography>
+        <MyTypography variant="h4">{item.name}</MyTypography>
       </Link>
     );
   });

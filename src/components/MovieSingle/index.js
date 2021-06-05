@@ -52,10 +52,9 @@ function MovieSingle(props) {
           {/* Information */}
           <Grid container sm={12} xs={8} className={classes.info}>
             <div className={classes.thongTinPhim}>
-              <div>
-                <Typography className={classes.tenPhim} variant="h2">
-                  {props.data.tenPhim}
-                </Typography>
+              <div className={classes.tenPhim}>
+                <span className={classes.limitAge}>C18</span>
+                {props.data.tenPhim}
               </div>
               <div>
                 <Typography className={classes.moTa} variant="h4">

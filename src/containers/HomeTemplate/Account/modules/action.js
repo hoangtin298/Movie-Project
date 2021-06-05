@@ -21,6 +21,41 @@ export const actGetCurrentAccountApi = (tuKhoa) => {
   };
 };
 
+export const actGetInfoApi = (taiKhoan) => {
+  return (dispatch) => {
+    dispatch(actGetInfoRequest());
+    axios({
+      url: `https://movie0706.cybersoft.edu.vn/api/QuanLyNguoiDung/ThongTinTaiKhoan`,
+      method: "POST",
+      data: { taiKhoan },
+    })
+      .then((result) => {
+        dispatch(actGetInfoSuccess(result.data));
+      })
+      .catch((error) => {
+        dispatch(actGetInfoFailed(error));
+      });
+  };
+};
+
+const actGetInfoRequest = () => {
+  return {
+    type: actionTypes.GET_INFO_REQUEST,
+  };
+};
+const actGetInfoSuccess = (info) => {
+  return {
+    type: actionTypes.GET_INFO_SUCCESS,
+    payload: info,
+  };
+};
+const actGetInfoFailed = (error) => {
+  return {
+    type: actionTypes.GET_INFO_FAILED,
+    payload: error,
+  };
+};
+
 const actGetCurrentAccountRequest = () => {
   return {
     type: actionTypes.GET_CURRENT_ACCOUNT_REQUEST,

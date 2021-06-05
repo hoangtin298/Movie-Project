@@ -5,7 +5,7 @@ const theme = createMuiTheme({
     h1: { fontSize: "20px", fontWeight: "500" },
     h2: { fontSize: "18px", fontWeight: "500" },
     h3: { fontSize: "16px", fontWeight: "500" },
-    h4: { fontSize: "14px" },
+    h4: { fontSize: "14px", fontWeight: "500" },
     h5: { fontSize: "13px" },
     h6: { fontSize: "12px" },
   },

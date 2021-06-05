@@ -3,3 +3,7 @@ export const GET_CURRENT_ACCOUNT_REQUEST =
 export const GET_CURRENT_ACCOUNT_SUCCESS =
   "account/GET_CURRENT_ACCOUNT_SUCCESS";
 export const GET_CURRENT_ACCOUNT_FAILED = "account/GET_CURRENT_ACCOUNT_FAILED";
+
+export const GET_INFO_REQUEST = "account/GET_INFO_REQUEST";
+export const GET_INFO_SUCCESS = "account/GET_INFO_SUCCESS";
+export const GET_INFO_FAILED = "account/GET_INFO_FAILED";

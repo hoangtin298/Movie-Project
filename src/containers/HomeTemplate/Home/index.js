@@ -8,6 +8,7 @@ import Footer from "../../../components/Footer";
 import { Container, CssBaseline, Hidden, makeStyles } from "@material-ui/core";
 import AppHome from "../../../components/AppHome";
 import BackNews from "../../../assets/back-news.png";
+import News from "../../../components/News";
 
 const useStyles = makeStyles((theme) => ({
   homeCinemaComplex: {
@@ -36,6 +37,7 @@ const Home = () => {
         ></Container>
         <CinemaList />
       </Hidden>
+      <News />
       <AppHome />
       <Footer />
     </>
