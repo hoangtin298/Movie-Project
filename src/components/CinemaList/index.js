@@ -150,7 +150,8 @@ function CinemaList() {
             className={classes.anhPhim}
           />
           <div className={classes.phimInfo}>
-            <Typography variant="h3" className={classes.tenPhim}>
+            <Typography variant="h2" className={classes.tenPhim}>
+              <span className={classes.limitAge}>C18</span>
               {item.tenPhim}
             </Typography>
 

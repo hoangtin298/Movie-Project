@@ -7,16 +7,16 @@ export const data = [
     name: "Cụm Rạp",
     id: "cumRap",
   },
-  // {
-  //   name: "Tin Tức",
-  //   id: "tinTuc",
-  // },
+  {
+    name: "Tin Tức",
+    id: "tinTuc",
+  },
   {
     name: "Ứng Dụng",
     id: "ungDung",
   },
   {
-    name: "Dashboard",
+    name: "Quản Lý",
     id: "dashboard",
   },
 ];

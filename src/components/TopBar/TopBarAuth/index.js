@@ -1,15 +1,31 @@
-import React from "react";
+import React, { useState } from "react";
 import MyTypography from "../MyTypography";
 import AccountCircleIcon from "@material-ui/icons/AccountCircle";
 import ExitToAppIcon from "@material-ui/icons/ExitToApp";
 import { useStyles } from "../style";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
+import Menu from "@material-ui/core/Menu";
+import MenuItem from "@material-ui/core/MenuItem";
+import { Button } from "@material-ui/core";
+import Swal from "sweetalert2";
+import Avatar from "@material-ui/core/Avatar";
+import userAvatar from "../../../assets/avatarTix.jpg";
 function TopBarAuth(props) {
   const classes = useStyles();
   const dispatch = useDispatch();
 
   const currentUser = useSelector((state) => state.currentUserReducer);
+
+  const [anchorEl, setAnchorEl] = useState(null);
+
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
+
+  const openMenu = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
 
   const renderUser = () => {
     return (
@@ -21,22 +37,38 @@ function TopBarAuth(props) {
           lg={6}
           className={classes.headAuthItems}
         >
-          <AccountCircleIcon fontSize="large" className={classes.authIcon} />
+          {/* <AccountCircleIcon fontSize="large" className={classes.authIcon} /> */}
+          <Avatar alt="Avatar" className={classes.authIcon} src={userAvatar} />
           <MyTypography className={classes.overflowEllipis}>
             {currentUser.taiKhoan}
           </MyTypography>
         </Link>
-
         <Link
           justify="flex-end"
           item
           lg={6}
           className={classes.headAuthItems}
           onClick={() => {
-            localStorage.removeItem("currentUser");
-            dispatch({
-              type: "LOG-OUT",
-              payload: null,
+            Swal.fire({
+              title: "Bạn có muốn đăng xuất ?",
+              showCancelButton: true,
+              confirmButtonText: `Đồng ý`,
+              cancelButtonText: "Hủy",
+              icon: "question",
+            }).then((result) => {
+              if (result.isConfirmed) {
+                Swal.fire({
+                  title: "Đã đăng xuất",
+                  text: "Cảm ơn bạn đã sử dụng TIX!",
+                  icon: "success",
+                  timer: "2000",
+                });
+                localStorage.removeItem("currentUser");
+                dispatch({
+                  type: "LOG-OUT",
+                  payload: null,
+                });
+              }
             });
           }}
         >

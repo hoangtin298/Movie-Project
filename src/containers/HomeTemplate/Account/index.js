@@ -19,10 +19,12 @@ import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
 import * as yup from "yup";
-import { actGetCurrentAccountApi } from "./modules/action";
+import { actGetCurrentAccountApi, actGetInfoApi } from "./modules/action";
 import Button from "@material-ui/core/Button";
 import { Redirect } from "react-router";
 import { swalFailed, swalSuccess } from "../../../utils";
+import moment from "moment";
+import backgroundImg from "../../../assets/backapp.jpg";
 
 const schema = yup.object().shape({
   hoTen: yup
@@ -44,7 +46,12 @@ const schema = yup.object().shape({
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    padding: theme.spacing(3),
+    padding: theme.spacing(4),
+    background: `url(${backgroundImg})`,
+    backgroundPosition: "center",
+    backgroundRepeat: "no-repeat",
+    backgroundSize: "cover",
+    minHeight: "100vh",
   },
   form: {
     width: "100%", // Fix IE 11 issue.
@@ -68,6 +75,36 @@ const useStyles = makeStyles((theme) => ({
     fontWeight: 600,
     marginBottom: theme.spacing(1),
   },
+  history: {
+    backgroundColor: theme.palette.common.white,
+    borderRadius: "4px",
+    marginTop: "40px",
+    flexGrow: "1",
+  },
+  historyContainer: {
+    display: "flex",
+    width: "100%",
+    flexWrap: "wrap",
+  },
+  historyItem: {
+    position: "relative",
+    display: "block",
+
+    padding: "15px",
+    "&::after": {
+      position: "absolute",
+      content: "''",
+      display: "block",
+      background: `url(${"https://tix.vn/app/assets/img/default-film.webp"})`,
+      borderRadius: theme.spacing(1),
+      opacity: "0.3",
+      top: 0,
+      left: 0,
+      right: 0,
+      bottom: 0,
+      zIndex: "0",
+    },
+  },
 }));
 
 export default function Account() {
@@ -85,13 +122,16 @@ export default function Account() {
           JSON.parse(localStorage.getItem("currentUser")).hoTen
         )
       );
+      dispatch(
+        actGetInfoApi(JSON.parse(localStorage.getItem("currentUser")).taiKhoan)
+      );
     }
   }, []);
 
-  const [showPassword, setShowPassword] = useState(false);
-
   const currentUser = useSelector((state) => state.accountReducer);
+  const info = useSelector((state) => state.infoReducer);
 
+  const [showPassword, setShowPassword] = useState(false);
   const [user, setUser] = useState(currentUser.data?.[0]);
 
   useEffect(() => {
@@ -140,6 +180,77 @@ export default function Account() {
       .catch((error) => {
         swalFailed(error);
       });
+  };
+
+  const renderHistory = (arr) => {
+    return arr.map((infoArr) => {
+      return (
+        <Grid
+          item
+          xs={12}
+          md={6}
+          className={classes.historyContainer}
+          key={infoArr.maVe}
+        >
+          <Grid className={classes.historyItem} container>
+            <Grid item xs={12}>
+              <Typography variant="h3" gutterBottom>
+                Ngày đặt: {moment(infoArr.ngayDat).format("DD-MM-YYYY | HH:mm")}
+              </Typography>
+            </Grid>
+            <Grid item xs={12}>
+              <Typography color="primary" variant="h1" gutterBottom>
+                Tên phim: {infoArr.tenPhim}
+              </Typography>
+            </Grid>
+            <Grid item xs={12}>
+              <Typography
+                style={{ display: "inline-block" }}
+                variant="h3"
+                gutterBottom
+              >
+                Thời lượng: {infoArr.thoiLuongPhim} phút
+              </Typography>
+              {", "}
+              <Typography
+                style={{ display: "inline-block" }}
+                variant="h3"
+                gutterBottom
+              >
+                Giá vé: {infoArr.giaVe} VND
+              </Typography>
+            </Grid>
+
+            <Grid item xs={12}>
+              <Typography color="secondary" variant="h1" gutterBottom>
+                {infoArr.danhSachGhe[0].tenHeThongRap}
+              </Typography>
+            </Grid>
+            {/* key = maRap */}
+            <Grid item xs={12}>
+              <Typography
+                variant="h3"
+                gutterBottom
+                style={{ display: "inline-block" }}
+              >
+                {infoArr.danhSachGhe[0].tenRap}
+              </Typography>
+              {",  "}
+              <Typography
+                variant="h3"
+                gutterBottom
+                style={{ display: "inline-block" }}
+              >
+                Ghế số:{" "}
+                {infoArr.danhSachGhe.map((item) => {
+                  return item.tenGhe + " ";
+                })}
+              </Typography>
+            </Grid>
+          </Grid>
+        </Grid>
+      );
+    });
   };
 
   return (
@@ -291,6 +402,23 @@ export default function Account() {
             </Grid>
           </form>
         )}
+        <Grid container spacing={3} className={classes.history}>
+          <Grid
+            item
+            xs={12}
+            style={{
+              paddingBottom: "0px",
+            }}
+          >
+            <Typography variant="h1" className={classes.headerText}>
+              Lịch sử đặt vé
+            </Typography>
+          </Grid>
+          <Grid item xs={12}>
+            <Divider />
+          </Grid>
+          {info.data && renderHistory(info.data.thongTinDatVe)}
+        </Grid>
       </Container>
     </div>
   );

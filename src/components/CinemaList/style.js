@@ -94,6 +94,7 @@ export const useStyles = makeStyles((theme) => ({
     fontSize: theme.typography.h4.fontSize,
     fontWeight: 500,
   },
+
   gioChieu: {
     color: theme.palette.primary.light,
   },
@@ -130,6 +131,18 @@ export const useStyles = makeStyles((theme) => ({
   },
   tenPhim: {
     marginBottom: theme.spacing(1),
+    lineHeight: "22px",
+  },
+  limitAge: {
+    display: "inline-block",
+    fontSize: "16px",
+    background: theme.palette.primary.main,
+    borderRadius: "4px",
+    padding: "0 5px",
+    color: theme.palette.common.white,
+    minWidth: "33px",
+    textAlign: "center",
+    marginRight: theme.spacing(1),
   },
   anhPhim: {
     width: 100,

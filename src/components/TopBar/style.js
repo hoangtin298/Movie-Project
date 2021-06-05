@@ -6,7 +6,7 @@ export const useStyles = makeStyles((theme) => ({
   offset: theme.mixins.toolbar,
   appBar: {},
   toolBar: {
-    backgroundColor: theme.palette.common.white,
+    backgroundColor: "rgba(255,255,255,.95)",
   },
   logo: {
     height: "50px",
@@ -21,7 +21,7 @@ export const useStyles = makeStyles((theme) => ({
     },
   },
   list: {
-    width: "250px",
+    width: "210px",
   },
 
   // Top Bar of Home Template
@@ -33,8 +33,10 @@ export const useStyles = makeStyles((theme) => ({
   headDataItems: {
     textDecoration: "none",
     color: theme.palette.common.black,
-    padding: theme.spacing(0, 4),
+    padding: theme.spacing(0, 2),
     cursor: "pointer",
+    transition: "all .3s",
+
     "&:hover": {
       color: theme.palette.primary.main,
     },
@@ -68,6 +70,8 @@ export const useStyles = makeStyles((theme) => ({
   },
   authIcon: {
     margin: theme.spacing(0, 1),
+    width: theme.spacing(4),
+    height: theme.spacing(4),
   },
   //
   overflowEllipis: {

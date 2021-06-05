@@ -43,12 +43,14 @@ export const actBookTicket = (ticketInfo) => {
         method: "POST",
         data: ticketInfo,
         headers: {
-          Authorization: `Bearer ${localStorage.getItem(TOKEN)}`,
+          Authorization: `Bearer ${
+            JSON.parse(localStorage.getItem("currentUser")).accessToken
+          }`,
         },
       });
 
       if (result.status === 200) {
-        window.location.reload();
+        // window.location.reload();
       }
     } catch (error) {
       console.log(localStorage.getItem(TOKEN));

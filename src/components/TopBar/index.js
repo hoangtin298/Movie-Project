@@ -22,11 +22,11 @@ const TopBar = (ComponentItems, ComponentAuth) => {
 
     return (
       <div className={classes.root}>
-        <AppBar position="fixed" color="default" className={classes.appBar}>
+        <AppBar position="fixed" color="transparent" className={classes.appBar}>
           <Toolbar className={classes.toolBar}>
-            <MyGridContainer justify="flex-start" spacing={2}>
+            <MyGridContainer justify="flex-start">
               {/* Logo */}
-              <Grid item xs={6} lg={3}>
+              <Grid item xs={6} lg={2}>
                 <Logo className={classes.logo} />
               </Grid>
               {isMatch ? (
@@ -41,7 +41,7 @@ const TopBar = (ComponentItems, ComponentAuth) => {
               ) : (
                 <>
                   {setOpen(false)}
-                  <MyGridContainer className={classes.headData} item lg={6}>
+                  <MyGridContainer className={classes.headData} item lg={7}>
                     <ComponentItems className={classes.headDataItems} />
                   </MyGridContainer>
                   <MyGridContainer
@@ -58,23 +58,25 @@ const TopBar = (ComponentItems, ComponentAuth) => {
           </Toolbar>
         </AppBar>
         <Toolbar className={classes.offset}></Toolbar>
-        <Drawer
-          anchor="left"
-          open={open}
-          onClose={() => {
-            setOpen(false);
-          }}
-        >
-          <div className={classes.list}>
-            <MyGridContainer className={classes.headAuth} item lg={3}>
-              <ComponentAuth />
-            </MyGridContainer>
-            <Divider />
-            <MyGridContainer className={classes.headData} item lg={8}>
-              <ComponentItems className={classes.headDataItems} />
-            </MyGridContainer>
-          </div>
-        </Drawer>
+        <React.Fragment key="left">
+          <Drawer
+            anchor="left"
+            open={open}
+            onClose={() => {
+              setOpen(false);
+            }}
+          >
+            <div role="presentation" className={classes.list}>
+              <MyGridContainer className={classes.headAuth} item lg={3}>
+                <ComponentAuth />
+              </MyGridContainer>
+              <Divider />
+              <MyGridContainer className={classes.headData} item lg={8}>
+                <ComponentItems className={classes.headDataItems} />
+              </MyGridContainer>
+            </div>
+          </Drawer>
+        </React.Fragment>
       </div>
     );
   };

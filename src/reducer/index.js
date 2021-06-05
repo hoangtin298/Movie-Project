@@ -10,7 +10,11 @@ import { userPagingReducer } from "../containers/AdminTemplate/ManageUser/module
 
 import { currentUserReducer } from "./currentUser";
 import { moviePagingReducer } from "../containers/AdminTemplate/ManageMovie/modules/reducer";
-import { accountReducer } from "../containers/HomeTemplate/Account/modules/reducer";
+import {
+  accountReducer,
+  infoReducer,
+} from "../containers/HomeTemplate/Account/modules/reducer";
+
 export const rootReducer = combineReducers({
   signInReducer,
   signUpReducer,
@@ -24,6 +28,7 @@ export const rootReducer = combineReducers({
 
   currentUserReducer,
   accountReducer,
+  infoReducer,
 
   moviePagingReducer,
 });
