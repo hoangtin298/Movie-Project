@@ -1,4 +1,3 @@
-import Dashboard from "../containers/AdminTemplate/Dashboard";
 import SignIn from "../containers/HomeTemplate/SignIn";
 import SignUp from "../containers/HomeTemplate/SignUp";
 import Detail from "../containers/HomeTemplate/Detail";
@@ -42,11 +41,6 @@ const routeHome = [
 ];
 
 const routeAdmin = [
-  {
-    exact: true,
-    path: "/dashboard",
-    component: Dashboard,
-  },
   {
     exact: false,
     path: "/manage-user",

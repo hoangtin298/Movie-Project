@@ -15,6 +15,7 @@ import { actGetUserPagingApi } from "./modules/action";
 import { Pagination } from "@material-ui/lab";
 import {
   Button,
+  CircularProgress,
   CssBaseline,
   Grid,
   InputBase,
@@ -24,6 +25,8 @@ import SearchIcon from "@material-ui/icons/Search";
 import ManageDialog from "./ManageDialog";
 import axios from "axios";
 import { swalSuccess, swalFailed } from "../../../utils/index";
+import LoadingPage from "../../../components/LoadingPage";
+import { Redirect } from "react-router";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -127,6 +130,17 @@ export default function ManageUser() {
   useEffect(() => {
     dispatch(actGetUserPagingApi(page.toString(), numberElementOfPage));
   }, []);
+
+  if (!localStorage.getItem("currentUser")) {
+    return <Redirect to="/" />;
+  }
+
+  if (
+    JSON.parse(localStorage.getItem("currentUser")).maLoaiNguoiDung !==
+    "QuanTri"
+  ) {
+    return <Redirect to="/" />;
+  }
 
   //Pagination
   const handleChange = (event, value) => {
@@ -236,69 +250,84 @@ export default function ManageUser() {
 
   return (
     <div className={classes.root}>
-      <CssBaseline />
-      <Grid container>
-        <Grid container item xs={12} justify="flex-end">
-          <Button
-            className={classes.button}
-            variant="contained"
-            color="primary"
-            onClick={handleAdd}
-          >
-            Thêm
-          </Button>
-        </Grid>
-        <Grid className={classes.searchForm} container item xs={12}>
-          <Paper elevation={1} component="form" className={classes.paper}>
-            <InputBase
-              placeholder="Tìm kiếm người dùng"
-              className={classes.inputBase}
-              onChange={handleOnChangeSearch}
-              onKeyDown={handleOnKeyPress}
-            />
-            <IconButton onClick={handleOnClickSearch}>
-              <SearchIcon color="primary" />
-            </IconButton>
-          </Paper>
-        </Grid>
-      </Grid>
-      <TableContainer className={classes.userForm} component={Paper}>
-        <Table className={classes.table} aria-label="simple table">
-          <TableHead>
-            <TableRow>
-              <TableCell align="left">Tài khoản</TableCell>
-              <TableCell align="left">Họ tên</TableCell>
-              <TableCell align="left">Email</TableCell>
-              <TableCell align="left">Số điện thoại</TableCell>
-              <TableCell align="left">Loại người dùng</TableCell>
-              <TableCell align="center">Chức năng</TableCell>
-            </TableRow>
-          </TableHead>
-          <TableBody>{userPaging.data ? renderUserPaging() : null}</TableBody>
-        </Table>
-      </TableContainer>
-      {/* Pagination */}
-      {userPaging.data ? (
-        <div className={classes.rootPagination}>
-          <Pagination
-            color="primary"
-            count={userPaging.data.totalPages - 1}
-            page={page}
-            onChange={handleChange}
-          />
-        </div>
-      ) : null}
-      {/* Dialog */}
+      {userPaging.loading ? (
+        <CircularProgress
+          color="primary"
+          style={{
+            position: "fixed",
+            top: "50%",
+            left: "50%",
+          }}
+        />
+      ) : (
+        <>
+          <CssBaseline />
+          <Grid container>
+            <Grid container item xs={12} justify="flex-end">
+              <Button
+                className={classes.button}
+                variant="contained"
+                color="primary"
+                onClick={handleAdd}
+              >
+                Thêm
+              </Button>
+            </Grid>
+            <Grid className={classes.searchForm} container item xs={12}>
+              <Paper elevation={1} component="form" className={classes.paper}>
+                <InputBase
+                  placeholder="Tìm kiếm người dùng"
+                  className={classes.inputBase}
+                  onChange={handleOnChangeSearch}
+                  onKeyDown={handleOnKeyPress}
+                />
+                <IconButton onClick={handleOnClickSearch}>
+                  <SearchIcon color="primary" />
+                </IconButton>
+              </Paper>
+            </Grid>
+          </Grid>
+          <TableContainer className={classes.userForm} component={Paper}>
+            <Table className={classes.table} aria-label="simple table">
+              <TableHead>
+                <TableRow>
+                  <TableCell align="left">Tài khoản</TableCell>
+                  <TableCell align="left">Họ tên</TableCell>
+                  <TableCell align="left">Email</TableCell>
+                  <TableCell align="left">Số điện thoại</TableCell>
+                  <TableCell align="left">Loại người dùng</TableCell>
+                  <TableCell align="center">Chức năng</TableCell>
+                </TableRow>
+              </TableHead>
+              <TableBody>
+                {userPaging.data ? renderUserPaging() : null}
+              </TableBody>
+            </Table>
+          </TableContainer>
+          {/* Pagination */}
+          {userPaging.data ? (
+            <div className={classes.rootPagination}>
+              <Pagination
+                color="primary"
+                count={userPaging.data.totalPages - 1}
+                page={page}
+                onChange={handleChange}
+              />
+            </div>
+          ) : null}
+          {/* Dialog */}
 
-      <ManageDialog
-        search={search}
-        page={page}
-        numberElementOfPage={numberElementOfPage}
-        openDialog={openDialog}
-        setOpenDialog={setOpenDialog}
-        handleCloseDialog={handleCloseDialog}
-        modal={modal}
-      />
+          <ManageDialog
+            search={search}
+            page={page}
+            numberElementOfPage={numberElementOfPage}
+            openDialog={openDialog}
+            setOpenDialog={setOpenDialog}
+            handleCloseDialog={handleCloseDialog}
+            modal={modal}
+          />
+        </>
+      )}
     </div>
   );
 }

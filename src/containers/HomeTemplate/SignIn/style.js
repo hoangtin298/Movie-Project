@@ -1,6 +1,15 @@
 import { makeStyles } from "@material-ui/core";
+import backgroundImg from "../../../assets/backapp.jpg";
 
 export const useStyles = makeStyles((theme) => ({
+  root: {
+    padding: theme.spacing(4),
+    background: `url(${backgroundImg})`,
+    backgroundPosition: "center",
+    backgroundRepeat: "no-repeat",
+    backgroundSize: "cover",
+    minHeight: "100vh",
+  },
   paper: {
     margin: theme.spacing(4, 0),
     display: "flex",

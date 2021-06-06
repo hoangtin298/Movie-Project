@@ -1,4 +1,4 @@
-import { Fab, makeStyles, useTheme } from "@material-ui/core";
+import { Fab, Hidden, makeStyles, useTheme } from "@material-ui/core";
 import React, { useState } from "react";
 import Carousel from "react-material-ui-carousel";
 import FiberManualRecordIcon from "@material-ui/icons/FiberManualRecord";
@@ -8,6 +8,7 @@ import theme from "../../theme";
 import imgButtonPlay from "../../assets/play-video.png";
 import ModalVideo from "react-modal-video";
 import "react-modal-video/css/modal-video.min.css";
+import HomeTool from "../HomeTool";
 
 const useStyles = makeStyles({
   carousel: {
@@ -103,7 +104,7 @@ function MyCarousel(props) {
         indicatorContainerProps={{
           style: {
             position: "absolute",
-            marginTop: "-5%",
+            marginTop: "-7%",
           },
         }}
       >
@@ -111,6 +112,9 @@ function MyCarousel(props) {
           <Item key={i} item={item} />
         ))}
       </Carousel>
+      <Hidden smDown>
+        <HomeTool />
+      </Hidden>
     </div>
   );
 }

@@ -160,9 +160,10 @@ function CinemaList() {
                 .slice(0, 4)
                 .map((childItem, childIndex) => {
                   return (
-                    <div
+                    <Link
                       key={childItem.maLichChieu}
                       className={classes.ngayGioChieuBox}
+                      to={`/purchase/${childItem.maLichChieu}`}
                     >
                       <div className={classes.ngayGioChieuInfo}>
                         <Typography className={classes.ngayChieu}>
@@ -175,7 +176,7 @@ function CinemaList() {
                           {moment(childItem.ngayChieuGioChieu).format("HH:mm")}
                         </Typography>
                       </div>
-                    </div>
+                    </Link>
                   );
                 })}
             </div>

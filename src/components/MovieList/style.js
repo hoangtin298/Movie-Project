@@ -2,8 +2,11 @@ import { makeStyles } from "@material-ui/core";
 
 export const useStyles = makeStyles((theme) => ({
   root: {
-    paddingTop: theme.spacing(3),
+    paddingTop: "50px",
     marginBottom: 30,
+    [theme.breakpoints.down("sm")]: {
+      padding: "20px",
+    },
   },
   carousel: {
     position: "relative",
@@ -23,14 +26,8 @@ export const useStyles = makeStyles((theme) => ({
     padding: "2px 4px",
     display: "flex",
     alignItems: "center",
-    marginLeft: "auto",
-    width: "400px",
-    [theme.breakpoints.down("sm")]: {
-      marginLeft: "unset",
-      marginTop: theme.spacing(2),
-      width: "100%",
-      height: "40px",
-    },
+    width: "100%",
+    height: "50px",
   },
   inputBase: {
     marginLeft: theme.spacing(1),

@@ -83,7 +83,8 @@ export const useStyles = makeStyles((theme) => ({
     width: "30%!important",
     position: "absolute",
     zIndex: "3",
-    top: "10%",
+    top: "50%",
+    transform: "translateY(-50%)",
   },
   detail__bticket: {
     borderRadius: "4px",

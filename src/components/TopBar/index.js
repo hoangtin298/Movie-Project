@@ -26,7 +26,7 @@ const TopBar = (ComponentItems, ComponentAuth) => {
           <Toolbar className={classes.toolBar}>
             <MyGridContainer justify="flex-start">
               {/* Logo */}
-              <Grid item xs={6} lg={2}>
+              <Grid item xs={6} lg={3}>
                 <Logo className={classes.logo} />
               </Grid>
               {isMatch ? (
@@ -41,14 +41,14 @@ const TopBar = (ComponentItems, ComponentAuth) => {
               ) : (
                 <>
                   {setOpen(false)}
-                  <MyGridContainer className={classes.headData} item lg={7}>
+                  <MyGridContainer className={classes.headData} item lg={5}>
                     <ComponentItems className={classes.headDataItems} />
                   </MyGridContainer>
                   <MyGridContainer
                     justify="flex-end"
                     className={classes.headAuth}
                     item
-                    lg={3}
+                    lg={4}
                   >
                     <ComponentAuth />
                   </MyGridContainer>

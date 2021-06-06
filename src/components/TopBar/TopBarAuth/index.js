@@ -7,7 +7,7 @@ import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import Menu from "@material-ui/core/Menu";
 import MenuItem from "@material-ui/core/MenuItem";
-import { Button } from "@material-ui/core";
+import { Button, Divider } from "@material-ui/core";
 import Swal from "sweetalert2";
 import Avatar from "@material-ui/core/Avatar";
 import userAvatar from "../../../assets/avatarTix.jpg";
@@ -37,12 +37,12 @@ function TopBarAuth(props) {
           lg={6}
           className={classes.headAuthItems}
         >
-          {/* <AccountCircleIcon fontSize="large" className={classes.authIcon} /> */}
           <Avatar alt="Avatar" className={classes.authIcon} src={userAvatar} />
           <MyTypography className={classes.overflowEllipis}>
-            {currentUser.taiKhoan}
+            {currentUser.hoTen}
           </MyTypography>
         </Link>
+        <Divider orientation="vertical" flexItem />
         <Link
           justify="flex-end"
           item
@@ -92,7 +92,7 @@ function TopBarAuth(props) {
           <AccountCircleIcon fontSize="large" className={classes.authIcon} />
           <MyTypography>Đăng Nhập</MyTypography>
         </Link>
-
+        <Divider orientation="vertical" flexItem />
         <Link
           to="/sign-up"
           justify="flex-end"

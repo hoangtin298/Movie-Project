@@ -11,19 +11,17 @@ import {
   List,
   Typography,
   makeStyles,
+  useTheme,
 } from "@material-ui/core";
 import userAvatar from "../../assets/avatarTix.jpg";
 import BarChartIcon from "@material-ui/icons/BarChart";
 import NavItem from "./NavItem";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import TheatersIcon from "@material-ui/icons/Theaters";
+import ExitToAppIcon from "@material-ui/icons/ExitToApp";
+import Swal from "sweetalert2";
 
 const items = [
-  {
-    href: "/dashboard",
-    icon: BarChartIcon,
-    title: "Dashboard",
-  },
   {
     href: "/manage-user",
     icon: GroupIcon,
@@ -55,7 +53,8 @@ const useStyles = makeStyles((theme) => ({
 
 const NavBarAdmin = ({ openDrawer, setOpenDrawer }) => {
   const classes = useStyles();
-
+  const theme = useTheme();
+  const dispatch = useDispatch();
   const user = useSelector((state) => state.currentUserReducer);
 
   const content = (
@@ -87,7 +86,59 @@ const NavBarAdmin = ({ openDrawer, setOpenDrawer }) => {
           ))}
         </List>
       </Box>
-      <Box flexGrow={1} />s
+
+      <Divider />
+
+      <Box p={2}>
+        <Button
+          style={{
+            color: theme.palette.text.secondary,
+            fontWeight: theme.typography.fontWeightMedium,
+            justifyContent: "flex-start",
+            letterSpacing: 0,
+            padding: "10px 8px",
+            textTransform: "none",
+            width: "100%",
+          }}
+          onClick={() => {
+            Swal.fire({
+              title: "Bạn có muốn đăng xuất ?",
+              showCancelButton: true,
+              confirmButtonText: `Đồng ý`,
+              cancelButtonText: "Hủy",
+              icon: "question",
+            }).then((result) => {
+              if (result.isConfirmed) {
+                Swal.fire({
+                  title: "Đã đăng xuất",
+                  text: "Cảm ơn bạn đã sử dụng TIX!",
+                  icon: "success",
+                  timer: "2000",
+                });
+                localStorage.removeItem("currentUser");
+                dispatch({
+                  type: "LOG-OUT",
+                  payload: null,
+                });
+              }
+            });
+          }}
+        >
+          <ExitToAppIcon style={{ marginRight: theme.spacing(1) }} />
+          <span
+            style={{
+              marginRight: "auto",
+            }}
+          >
+            {" "}
+            Đăng xuất
+          </span>
+        </Button>
+      </Box>
+
+      <Divider />
+
+      <Box flexGrow={1} />
     </Box>
   );
 

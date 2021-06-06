@@ -78,6 +78,6 @@ export const useStyles = makeStyles((theme) => ({
     textOverflow: "ellipsis",
     whiteSpace: "nowrap",
     overflow: "hidden",
-    width: "90px",
+    maxWidth: "200px",
   },
 }));

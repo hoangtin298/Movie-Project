@@ -58,149 +58,157 @@ const SignUp = () => {
     event.preventDefault();
   };
   return (
-    <Container component="main" maxWidth="xs" className={classes.formContainer}>
-      <CssBaseline />
-      <div className={classes.paper}>
-        <Avatar className={classes.avatar}>
-          <LockOutlinedIcon />
-        </Avatar>
-        <Typography component="h1" variant="h1">
-          Đăng ký
-        </Typography>
-        <form
-          className={classes.form}
-          onSubmit={handleSubmit(onSubmit)}
-          noValidate
-        >
-          <Grid container spacing={2}>
-            <Grid item xs={12}>
-              <TextField
-                variant="outlined"
-                required
-                fullWidth
-                id="taiKhoan"
-                label="Tài Khoản"
-                name="taiKhoan"
-                autoComplete="taiKhoan"
-                inputRef={register}
-                error={!!errors.taiKhoan}
-                helperText={errors?.taiKhoan?.message}
-              />
-            </Grid>
-            <Grid item xs={12}>
-              <TextField
-                variant="outlined"
-                required
-                fullWidth
-                name="matKhau"
-                label="Mật Khẩu"
-                type="password"
-                id="matKhau"
-                autoComplete="current-password"
-                inputRef={register}
-                error={!!errors.matKhau}
-                helperText={errors?.matKhau?.message}
-                type={showPassword ? "text" : "password"}
-                InputProps={{
-                  endAdornment: (
-                    <InputAdornment position="end">
-                      <IconButton
-                        onClick={handleClickShowPassword}
-                        onMouseDown={handleMouseDownPassword}
-                        edge="end"
-                      >
-                        {showPassword ? <Visibility /> : <VisibilityOff />}
-                      </IconButton>
-                    </InputAdornment>
-                  ),
-                }}
-              />
-            </Grid>
-            <Grid item xs={12}>
-              <TextField
-                variant="outlined"
-                required
-                fullWidth
-                name="confirmPassWord"
-                label="Nhập lại mật khẩu"
-                type="password"
-                id="confirmPassWord"
-                autoComplete="current-password"
-                inputRef={register}
-                error={!!errors.confirmPassWord}
-                helperText={errors?.confirmPassWord?.message}
-                type={showPassword ? "text" : "password"}
-                InputProps={{
-                  endAdornment: (
-                    <InputAdornment position="end">
-                      <IconButton
-                        onClick={handleClickShowPassword}
-                        onMouseDown={handleMouseDownPassword}
-                        edge="end"
-                      >
-                        {showPassword ? <Visibility /> : <VisibilityOff />}
-                      </IconButton>
-                    </InputAdornment>
-                  ),
-                }}
-              />
-            </Grid>
-            <Grid item xs={12}>
-              <TextField
-                variant="outlined"
-                required
-                fullWidth
-                id="hoTen"
-                label="Họ Tên"
-                name="hoTen"
-                autoComplete="hoTen"
-                inputRef={register}
-                error={!!errors.hoTen}
-                helperText={errors?.hoTen?.message}
-              />
-            </Grid>
-            <Grid item xs={12}>
-              <TextField
-                variant="outlined"
-                required
-                fullWidth
-                id="email"
-                label="Email"
-                name="email"
-                autoComplete="email"
-                inputRef={register}
-                error={!!errors.email}
-                helperText={errors?.email?.message}
-              />
-            </Grid>
-          </Grid>
-
-          {/* In ra loi neu dang nhap that bai */}
-          {signUpReducer.error ? (
-            <Alert severity="error" className={classes.alert}>
-              {signUpReducer.error.response.data}
-            </Alert>
-          ) : null}
-
-          <Button
-            type="submit"
-            fullWidth
-            variant="contained"
-            color="primary"
-            className={classes.submit}
-          >
+    <div className={classes.root}>
+      <Container
+        component="main"
+        maxWidth="xs"
+        className={classes.formContainer}
+      >
+        <CssBaseline />
+        <div className={classes.paper}>
+          <Avatar className={classes.avatar}>
+            <LockOutlinedIcon />
+          </Avatar>
+          <Typography component="h1" variant="h1">
             Đăng ký
-          </Button>
-          <Grid container justify="flex-end">
-            <Grid item>
-              <Link to="/sign-in" variant="body2">
-                Bạn đã có tài khoản? Đăng nhập
-              </Link>
+          </Typography>
+          <form
+            className={classes.form}
+            onSubmit={handleSubmit(onSubmit)}
+            noValidate
+          >
+            <Grid container spacing={2}>
+              <Grid item xs={12}>
+                <TextField
+                  variant="outlined"
+                  required
+                  fullWidth
+                  id="taiKhoan"
+                  label="Tài Khoản"
+                  name="taiKhoan"
+                  autoComplete="taiKhoan"
+                  inputRef={register}
+                  error={!!errors.taiKhoan}
+                  helperText={errors?.taiKhoan?.message}
+                />
+              </Grid>
+              <Grid item xs={12}>
+                <TextField
+                  variant="outlined"
+                  required
+                  fullWidth
+                  name="matKhau"
+                  label="Mật Khẩu"
+                  type="password"
+                  id="matKhau"
+                  autoComplete="current-password"
+                  inputRef={register}
+                  error={!!errors.matKhau}
+                  helperText={errors?.matKhau?.message}
+                  type={showPassword ? "text" : "password"}
+                  InputProps={{
+                    endAdornment: (
+                      <InputAdornment position="end">
+                        <IconButton
+                          onClick={handleClickShowPassword}
+                          onMouseDown={handleMouseDownPassword}
+                          edge="end"
+                        >
+                          {showPassword ? <Visibility /> : <VisibilityOff />}
+                        </IconButton>
+                      </InputAdornment>
+                    ),
+                  }}
+                />
+              </Grid>
+              <Grid item xs={12}>
+                <TextField
+                  variant="outlined"
+                  required
+                  fullWidth
+                  name="confirmPassWord"
+                  label="Nhập lại mật khẩu"
+                  type="password"
+                  id="confirmPassWord"
+                  autoComplete="current-password"
+                  inputRef={register}
+                  error={!!errors.confirmPassWord}
+                  helperText={errors?.confirmPassWord?.message}
+                  type={showPassword ? "text" : "password"}
+                  InputProps={{
+                    endAdornment: (
+                      <InputAdornment position="end">
+                        <IconButton
+                          onClick={handleClickShowPassword}
+                          onMouseDown={handleMouseDownPassword}
+                          edge="end"
+                        >
+                          {showPassword ? <Visibility /> : <VisibilityOff />}
+                        </IconButton>
+                      </InputAdornment>
+                    ),
+                  }}
+                />
+              </Grid>
+              <Grid item xs={12}>
+                <TextField
+                  variant="outlined"
+                  required
+                  fullWidth
+                  id="hoTen"
+                  label="Họ Tên"
+                  name="hoTen"
+                  autoComplete="hoTen"
+                  inputRef={register}
+                  error={!!errors.hoTen}
+                  helperText={errors?.hoTen?.message}
+                />
+              </Grid>
+              <Grid item xs={12}>
+                <TextField
+                  variant="outlined"
+                  required
+                  fullWidth
+                  id="email"
+                  label="Email"
+                  name="email"
+                  autoComplete="email"
+                  inputRef={register}
+                  error={!!errors.email}
+                  helperText={errors?.email?.message}
+                />
+              </Grid>
             </Grid>
-          </Grid>
-        </form>
-      </div>
-    </Container>
+
+            {/* In ra loi neu dang nhap that bai */}
+            {signUpReducer.error ? (
+              <Alert severity="error" className={classes.alert}>
+                {signUpReducer.error.response.data}
+              </Alert>
+            ) : null}
+
+            <Button
+              type="submit"
+              fullWidth
+              variant="contained"
+              color="primary"
+              className={classes.submit}
+            >
+              Đăng ký
+            </Button>
+            <Grid container justify="flex-end">
+              <Grid item>
+                <Link to="/sign-in">
+                  <Typography variant="h3">
+                    Bạn đã có tài khoản? Đăng nhập
+                  </Typography>
+                </Link>
+              </Grid>
+            </Grid>
+          </form>
+        </div>
+      </Container>
+    </div>
   );
 };
 

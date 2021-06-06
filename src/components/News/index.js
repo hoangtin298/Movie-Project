@@ -154,7 +154,7 @@ const StyledTab = withStyles({
 
 export default function News() {
   const classes = useStyles();
-
+  const [loading, setLoading] = useState(true);
   const [newsDienAnh, setNewsDienAnh] = useState(null);
   const [newsReview, setNewsReview] = useState(null);
   const [newsKhuyenMai, setNewsKhuyenMai] = useState(null);
@@ -243,7 +243,7 @@ export default function News() {
   const renderNews = (newsArr) => {
     return (
       <Grid container spacing={2}>
-        <Grid item md={6}>
+        <Grid item xs={12} md={6}>
           <div className={classes.thumbnail}>
             <a target="_blank" href={newsArr[0].url}>
               <img
@@ -264,7 +264,7 @@ export default function News() {
           </a>
           <Typography className={classes.desc}>{newsArr[0].text}</Typography>
         </Grid>
-        <Grid item md={6}>
+        <Grid item xs={12} md={6}>
           <div className={classes.thumbnail}>
             <a target="_blank" href={newsArr[1].url}>
               <img
@@ -285,7 +285,7 @@ export default function News() {
           </a>
           <Typography className={classes.desc}>{newsArr[1].text}</Typography>
         </Grid>
-        <Grid item md={4}>
+        <Grid item xs={12} md={4}>
           <div className={classes.thumbnail}>
             <a target="_blank" href={newsArr[2].url}>
               <img
@@ -306,7 +306,7 @@ export default function News() {
           </a>
           <Typography className={classes.desc}>{newsArr[2].text}</Typography>
         </Grid>
-        <Grid item md={4}>
+        <Grid item xs={12} md={4}>
           <div className={classes.thumbnail}>
             <a target="_blank" href={newsArr[3].url}>
               <img
@@ -329,6 +329,7 @@ export default function News() {
         </Grid>
         <Grid
           item
+          xs={12}
           md={4}
           style={{
             display: "flex",

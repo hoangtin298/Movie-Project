@@ -15,8 +15,8 @@ export const data = [
     name: "Ứng Dụng",
     id: "ungDung",
   },
-  {
-    name: "Quản Lý",
-    id: "dashboard",
-  },
+  // {
+  //   name: "Quản Lý",
+  //   id: "dashboard",
+  // },
 ];
