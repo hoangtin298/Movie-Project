@@ -1,4 +1,4 @@
-###ReactJS Movie
+### ReactJS Movie
 ###`Members: FE57 Nguyễn Hoàng Tín, FE558 Hoàng Minh Khang`
 ### HomeTemplate
 HomePage: Nguyễn Hoàng Tín + Hoàng Minh Khang
