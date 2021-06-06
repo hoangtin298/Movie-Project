@@ -88,8 +88,8 @@ export const useStyles = makeStyles((theme) => ({
   tenPhim: {
     fontSize: "18px",
     fontWeight: 500,
-    height: "42px",
-    maxHeight: "42px",
+    height: "45px",
+    maxHeight: "45px",
     lineHeight: "22px",
     display: "-webkit-box",
     WebkitLineClamp: "2",
@@ -132,7 +132,7 @@ export const useStyles = makeStyles((theme) => ({
     opacity: "1",
     visibility: "visible",
 
-    margin: theme.spacing(1, 0, 2, 0),
+    margin: theme.spacing(0, 0, 2, 0),
     color: theme.palette.grey[600],
 
     [theme.breakpoints.down("xs")]: {

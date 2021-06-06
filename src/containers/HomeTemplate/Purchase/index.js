@@ -13,6 +13,10 @@ import { useStyles } from "./style";
 import Spinner from "react-spinner-material";
 import { Fragment } from "react";
 import { CURRENTUSER } from "./modules/newconstant";
+import LoadingPage from "../../../components/LoadingPage";
+import Swal from "sweetalert2";
+import { useHistory } from "react-router";
+
 function Purchase(props) {
   const renderLoading = () => {
     return (
@@ -36,11 +40,16 @@ function Purchase(props) {
   };
   const movieShowtimes = useSelector((state) => state.movieShowtimesReducer);
   const dispatch = useDispatch();
+  const history = useHistory();
   useEffect(() => {
     let showtimesID = props.match.params.maLichChieu;
     dispatch(actGetMovieShowtimesApi(showtimesID));
   }, []);
+
   const [num, setnum] = useState(0);
+  const [flag, setFlag] = useState(false);
+  const [totalMoney, setTotalMoney] = useState(0);
+  const [selectedChair, setSelectedChair] = useState(null);
   const chairRowArray = ["A", "B", "C", "D", "E", "F", "G", "H", "J", "K"];
   const renderChairRow = (index) => {
     return (
@@ -88,7 +97,7 @@ function Purchase(props) {
   return (
     <div className={classes.root}>
       {movieShowtimes.loading ? (
-        renderLoading()
+        <LoadingPage />
       ) : (
         <Grid container>
           <Grid item xs={8}>
@@ -215,6 +224,30 @@ function Purchase(props) {
                 <Divider variant="middle" />
                 <Button
                   onClick={() => {
+                    if (!localStorage.getItem(CURRENTUSER)) {
+                      Swal.fire({
+                        icon: "error",
+                        title: "Bạn chưa đăng nhập",
+                        text: "Bạn có muốn đăng nhập không ?",
+                        confirmButtonText: "Đồng ý",
+                        showDenyButton: true,
+                        denyButtonText: "Không",
+                      }).then((result) => {
+                        if (result.isConfirmed) {
+                          history.push("/sign-in");
+                        }
+                      });
+                      return;
+                    }
+                    if (movieShowtimes.bookingChairList.length === 0) {
+                      Swal.fire({
+                        icon: "error",
+                        title: "Bạn chưa chọn ghế",
+                        text: "Vui lòng chọn ghế ?",
+                        confirmButtonText: "Đã hiểu",
+                      });
+                      return;
+                    }
                     let userLogin = JSON.parse(
                       localStorage.getItem(CURRENTUSER)
                     );
@@ -226,6 +259,26 @@ function Purchase(props) {
                     console.log(objectAPI);
                     const action = actBookTicket(objectAPI);
                     dispatch(action);
+                    Swal.fire({
+                      icon: "success",
+                      title: "Đặt vé thành công",
+                      text: "Kiểm tra trong lịch sử đặt vé",
+                      confirmButtonText: "Đồng ý",
+                    }).then((result) => {
+                      if (result.isConfirmed) {
+                        dispatch(
+                          actGetMovieShowtimesApi(
+                            props.match.params.maLichChieu
+                          )
+                        );
+                      } else {
+                        dispatch(
+                          actGetMovieShowtimesApi(
+                            props.match.params.maLichChieu
+                          )
+                        );
+                      }
+                    });
                   }}
                   className={classes.buttonPurchase}
                 >

@@ -21,6 +21,8 @@ import MenuCinema from "../../../components/MenuCinema";
 import imgButtonPlay from "../../../assets/play-video.png";
 import ModalVideo from "react-modal-video";
 import "react-modal-video/css/modal-video.min.css";
+import LoadingPage from "../../../components/LoadingPage";
+
 function Detail(props) {
   const renderLoading = () => {
     return (
@@ -77,11 +79,7 @@ function Detail(props) {
   };
   const renderDanhGiaPhim = (data) => {
     return (
-      <Grid
-        container
-        className={classes.detail__filmInfo}
-        style={{ right: "-15%" }}
-      >
+      <Grid container className={classes.detail__filmInfo}>
         <Grid item className={classes.detail__flexColumn}>
           <Box
             position="relative"
@@ -165,7 +163,7 @@ function Detail(props) {
 
   return (
     <Container
-      maxWidth="xl"
+      maxWidth="false"
       style={{
         position: "relative",
         backgroundColor: "#0a2029",
@@ -173,7 +171,7 @@ function Detail(props) {
       }}
     >
       {movieDetail.loading ? (
-        renderLoading()
+        <LoadingPage />
       ) : (
         <div
           style={{
@@ -219,10 +217,25 @@ function Detail(props) {
                     </div>
                   </div>
                 </Grid>
-                <Grid item xs={5} className={classes.colorWhite}>
+                <Grid
+                  style={{
+                    position: "relative",
+                  }}
+                  item
+                  xs={6}
+                  className={classes.colorWhite}
+                >
                   {renderThongTinPhim(movieDetail.data)}
                 </Grid>
-                <Grid item xs={4}>
+                <Grid
+                  style={{
+                    position: "relative",
+                    display: "flex",
+                    justifyContent: "center",
+                  }}
+                  item
+                  xs={3}
+                >
                   {renderDanhGiaPhim(movieDetail.data)}
                 </Grid>
                 <Grid

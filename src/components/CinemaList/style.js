@@ -107,6 +107,7 @@ export const useStyles = makeStyles((theme) => ({
     flexWrap: "wrap",
   },
   ngayGioChieuBox: {
+    textDecoration: "none",
     width: "45%",
     backgroundColor: "rgba(246, 246, 246, 0.5)",
     border: "1px solid #e4e4e4",

@@ -24,6 +24,9 @@ import { Pagination } from "@material-ui/lab";
 import axios from "axios";
 import { swalSuccess, swalFailed } from "../../../utils/index";
 import ManageMovieDialog from "./ManageMovieDialog";
+import LoadingPage from "../../../components/LoadingPage";
+import { Redirect } from "react-router";
+import CircularProgress from "@material-ui/core/CircularProgress";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -102,7 +105,16 @@ export default function ManageMovie() {
   useEffect(() => {
     dispatch(actGetMoviePagingApi(page.toString(), numberElementOfPage));
   }, []);
+  if (!localStorage.getItem("currentUser")) {
+    return <Redirect to="/" />;
+  }
 
+  if (
+    JSON.parse(localStorage.getItem("currentUser")).maLoaiNguoiDung !==
+    "QuanTri"
+  ) {
+    return <Redirect to="/" />;
+  }
   const handleUpdate = (movie) => {
     setModal({
       title: "Chỉnh Sửa Phim",
@@ -255,76 +267,88 @@ export default function ManageMovie() {
 
   return (
     <div className={classes.root}>
-      <CssBaseline />
-      <Grid container>
-        <Grid item xs={12} className={classes.buttonContainer}>
-          <Button
-            variant="contained"
-            color="primary"
-            className={classes.button}
-            onClick={handleAdd}
-          >
-            Thêm
-          </Button>
-        </Grid>
-        <Grid className={classes.searchForm} item xs={12}>
-          <Paper className={classes.paper} elevation={1} component="form">
-            <InputBase
-              className={classes.inputBase}
-              placeholder="Tìm kiếm phim"
-              onChange={handleOnChangeSearch}
-              onKeyDown={handleOnKeyPress}
-            />
-            <IconButton onClick={handleOnClickSearch}>
-              <SearchIcon color="primary" />
-            </IconButton>
-          </Paper>
-        </Grid>
-      </Grid>
+      {moviePaging.loading ? (
+        <CircularProgress
+          style={{
+            position: "fixed",
+            top: "50%",
+            left: "50%",
+          }}
+        />
+      ) : (
+        <>
+          <CssBaseline />
+          <Grid container>
+            <Grid item xs={12} className={classes.buttonContainer}>
+              <Button
+                variant="contained"
+                color="primary"
+                className={classes.button}
+                onClick={handleAdd}
+              >
+                Thêm
+              </Button>
+            </Grid>
+            <Grid className={classes.searchForm} item xs={12}>
+              <Paper className={classes.paper} elevation={1} component="form">
+                <InputBase
+                  className={classes.inputBase}
+                  placeholder="Tìm kiếm phim"
+                  onChange={handleOnChangeSearch}
+                  onKeyDown={handleOnKeyPress}
+                />
+                <IconButton onClick={handleOnClickSearch}>
+                  <SearchIcon color="primary" />
+                </IconButton>
+              </Paper>
+            </Grid>
+          </Grid>
 
-      <TableContainer className={classes.userForm} component={Paper}>
-        <Table className={classes.table}>
-          <TableHead>
-            <TableRow>
-              <TableCell align="left">Tên phim</TableCell>
-              <TableCell align="left">Mô tả</TableCell>
-              <TableCell align="left">Ngày chiếu</TableCell>
-              <TableCell align="left">Đánh giá</TableCell>
-              <TableCell align="left">Hình ảnh</TableCell>
-              <TableCell align="left">Chức năng</TableCell>
-            </TableRow>
-          </TableHead>
-          <TableBody>{moviePaging.data && renderMoviePaging()}</TableBody>
-        </Table>
-      </TableContainer>
-      {/* Pagination */}
-      {moviePaging.data && (
-        <div className={classes.rootPagination}>
-          <Pagination
-            color="primary"
-            count={moviePaging.data.totalPages}
+          <TableContainer className={classes.userForm} component={Paper}>
+            <Table className={classes.table}>
+              <TableHead>
+                <TableRow>
+                  <TableCell align="left">Tên phim</TableCell>
+                  <TableCell align="left">Mô tả</TableCell>
+                  <TableCell align="left">Ngày chiếu</TableCell>
+                  <TableCell align="left">Đánh giá</TableCell>
+                  <TableCell align="left">Hình ảnh</TableCell>
+                  <TableCell align="left">Chức năng</TableCell>
+                </TableRow>
+              </TableHead>
+              <TableBody>{moviePaging.data && renderMoviePaging()}</TableBody>
+            </Table>
+          </TableContainer>
+          {/* Pagination */}
+          {moviePaging.data && (
+            <div className={classes.rootPagination}>
+              <Pagination
+                color="primary"
+                count={moviePaging.data.totalPages}
+                page={page}
+                onChange={handleChangePagination}
+              />
+            </div>
+          )}
+          {/* Dialog */}
+          <ManageMovieDialog
+            search={search}
             page={page}
-            onChange={handleChangePagination}
+            numberElementOfPage={numberElementOfPage}
+            openDialog={openDialog}
+            setOpenDialog={setOpenDialog}
+            handleCloseDialog={handleCloseDialog}
+            modal={modal}
+            movie={movie}
+            selectedDate={selectedDate}
+            setSelectedDate={setSelectedDate}
+            selectedImage={selectedImage}
+            setSelectedImage={setSelectedImage}
+            selectedFile={selectedFile}
+            setSelectedFile={setSelectedFile}
           />
-        </div>
+        </>
       )}
-      {/* Dialog */}
-      <ManageMovieDialog
-        search={search}
-        page={page}
-        numberElementOfPage={numberElementOfPage}
-        openDialog={openDialog}
-        setOpenDialog={setOpenDialog}
-        handleCloseDialog={handleCloseDialog}
-        modal={modal}
-        movie={movie}
-        selectedDate={selectedDate}
-        setSelectedDate={setSelectedDate}
-        selectedImage={selectedImage}
-        setSelectedImage={setSelectedImage}
-        selectedFile={selectedFile}
-        setSelectedFile={setSelectedFile}
-      />
     </div>
   );
 }

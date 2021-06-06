@@ -1,6 +1,7 @@
 import {
   Container,
   Grid,
+  Hidden,
   IconButton,
   InputBase,
   Paper,
@@ -114,26 +115,19 @@ function MovieList(props) {
   return (
     <Container maxWidth="lg" className={classes.root} id="lichChieu">
       <Container maxWidth="md" className={classes.movieHead}>
-        <Grid container alignItems="center">
-          <Grid item xs={12} md={6}>
-            <Typography className={classes.title} variant="h1">
-              Danh sách phim đang chiếu
-            </Typography>
-          </Grid>
-          <Grid item xs={12} md={6}>
-            <Paper elevation={4} component="form" className={classes.paper}>
-              <InputBase
-                placeholder="Tìm kiếm phim"
-                className={classes.inputBase}
-                onChange={handleOnChangeSearch}
-                onKeyDown={handleOnKeyPress}
-              />
-              <IconButton onClick={handleOnClickSearch}>
-                <SearchIcon color="primary" />
-              </IconButton>
-            </Paper>
-          </Grid>
-        </Grid>
+        <Hidden mdUp>
+          <Paper elevation={4} component="form" className={classes.paper}>
+            <InputBase
+              placeholder="Tìm kiếm phim"
+              className={classes.inputBase}
+              onChange={handleOnChangeSearch}
+              onKeyDown={handleOnKeyPress}
+            />
+            <IconButton onClick={handleOnClickSearch}>
+              <SearchIcon color="primary" />
+            </IconButton>
+          </Paper>
+        </Hidden>
       </Container>
 
       {movieList.loading ? renderLoading() : null}

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import MyCarousel from "../../../components/MyCarousel";
 import CinemaList from "../../../components/CinemaList";
 import MovieList from "../../../components/MovieList";
@@ -9,6 +9,7 @@ import { Container, CssBaseline, Hidden, makeStyles } from "@material-ui/core";
 import AppHome from "../../../components/AppHome";
 import BackNews from "../../../assets/back-news.png";
 import News from "../../../components/News";
+import LoadingPage from "../../../components/LoadingPage";
 
 const useStyles = makeStyles((theme) => ({
   homeCinemaComplex: {
@@ -22,24 +23,37 @@ const useStyles = makeStyles((theme) => ({
 
 const Home = () => {
   const classes = useStyles();
+  const [loading, setLoading] = useState(false);
+  useEffect(() => {
+    setLoading(true);
+    setTimeout(() => {
+      setLoading(false);
+    }, 1500);
+  }, []);
 
   return (
     <>
-      <Hidden xsDown>
-        <MyCarousel />
-      </Hidden>
-      <MovieList />
-      <Hidden smDown>
-        <Container
-          maxWidth="md"
-          className={classes.homeCinemaComplex}
-          id="cumRap"
-        ></Container>
-        <CinemaList />
-      </Hidden>
-      <News />
-      <AppHome />
-      <Footer />
+      {loading ? (
+        <LoadingPage />
+      ) : (
+        <>
+          <Hidden xsDown>
+            <MyCarousel />
+          </Hidden>
+          <MovieList />
+          <Hidden smDown>
+            <Container
+              maxWidth="md"
+              className={classes.homeCinemaComplex}
+              id="cumRap"
+            ></Container>
+            <CinemaList />
+          </Hidden>
+          <News />
+          <AppHome />
+          <Footer />{" "}
+        </>
+      )}
     </>
   );
 };
