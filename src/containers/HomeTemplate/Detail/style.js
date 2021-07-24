@@ -20,15 +20,15 @@ export const useStyles = makeStyles((theme) => ({
     width: "100%",
     height: "550px",
   },
-  detail__bgGradient: {
-    position: "absolute",
-    top: "0",
-    left: "0",
-    background: "linear-gradient(to top, rgb(10, 32, 41), transparent 100%)",
-    height: "150%",
-    width: "100%",
-    zIndex: "2",
-  },
+  // detail__bgGradient: {
+  //   position: "absolute",
+  //   top: "0",
+  //   left: "0",
+  //   background: "linear-gradient(to top, rgb(10, 32, 41), transparent 100%)",
+  //   // height: "100vh",
+  //   width: "100%",
+  //   zIndex: "2",
+  // },
   detail__shiftCenter: {
     position: "absolute",
     zIndex: "4",
@@ -80,19 +80,25 @@ export const useStyles = makeStyles((theme) => ({
     color: theme.palette.common.white,
   },
   detail__filmInfo: {
-    width: "30%!important",
+    // width: "30%!important",
     position: "absolute",
     zIndex: "3",
-    top: "50%",
-    transform: "translateY(-50%)",
+    top: "15%",
+    // transform: "translateY(-50%)",
+    [theme.breakpoints.down("sm")]: {
+      top: "10%",
+    },
   },
   detail__bticket: {
     borderRadius: "4px",
+    width: "100px",
     color: theme.palette.common.white,
     fontSize: theme.typography.h3.fontSize,
     textDecoration: "none",
     textAlign: "center",
-    padding: theme.spacing(0.9, 3),
+    display: "block",
+    padding: theme.spacing(1, 2),
+    margin: theme.spacing(1, 0),
     backgroundColor: theme.palette.primary.main,
     cursor: "pointer",
     "&:hover": {
@@ -109,10 +115,10 @@ export const useStyles = makeStyles((theme) => ({
     fontSize: "50px",
   },
   progressBarBg: {
-    left: "5px",
+    // left: "5px",
     width: "110px!important",
     height: "110px!important",
-    zIndex: "-1",
+    zIndex: "-2",
     backgroundColor: "rgba(0,0,0,.4)",
     borderRadius: "50%",
   },
@@ -120,5 +126,62 @@ export const useStyles = makeStyles((theme) => ({
     display: "flex",
     flexDirection: "column",
     justifyContent: "center",
+    alignItems: "center",
+    transform: "translateX(90px)",
+  },
+  spacingRow: {
+    margin: theme.spacing(1, 0),
+  },
+  ratingStar: {
+    marginTop: "10px",
+    color: theme.palette.primary.main,
+    [theme.breakpoints.down("sm")]: {
+      fontSize: "10px!important",
+      margin: theme.spacing(1, 0),
+    },
+  },
+  detailContainer: {
+    margin: "10px 0",
+  },
+  detailAccor: {
+    backgroundColor: "transparent!important",
+    border: "none!important",
+    color: "#fff",
+    marginBottom: theme.spacing(1),
+    boxShadow: "unset!important",
+  },
+  noPadding: {
+    padding: "0!important",
+  },
+  noMinHeight: {
+    height: "15px!important",
+    minHeight: "unset",
+
+    width: "90px",
+  },
+  colorNe: {
+    color: "#fff",
+  },
+  overFlowY: {
+    height: "70px",
+    overflowY: "auto",
+    "&::-webkit-scrollbar": {
+      width: "7px",
+    },
+    "&::-webkit-scrollbar-track": {
+      boxShadow: "inset 0 0 5px grey",
+      borderRadius: "10px",
+    },
+    "&::-webkit-scrollbar-thumb": {
+      boxShadow: "inset 0 0 5px #616161",
+      background: theme.palette.common.white,
+      borderRadius: "10px",
+    },
+  },
+  heading: {
+    fontSize: "16px",
+    [theme.breakpoints.down("sm")]: {
+      fontSize: "13px!important",
+    },
   },
 }));

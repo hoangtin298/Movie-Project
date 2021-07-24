@@ -169,4 +169,29 @@ export const useStyles = makeStyles((theme) => ({
       position: "relative",
     },
   },
+  card__avgptsFilm: {
+    fontSize: theme.typography.h3.fontSize,
+    backgroundColor: "rgba(12,27,54,0.8)",
+    border: "1px solid #1f2e46",
+    borderRadius: "4px",
+    padding: "2px",
+    position: "absolute",
+    zIndex: "3",
+    top: "12px",
+    right: "12px",
+    color: "#fff",
+    width: "54px",
+    textAlign: "center",
+    lineHeight: "1.1",
+  },
+  card__txtPoint: {
+    lineHeight: "1.1!important",
+  },
+  card__rating: {
+    color: theme.palette.primary.main,
+    fontSize: "8px!important",
+    [theme.breakpoints.down("sm")]: {
+      fontSize: "10px!important",
+    },
+  },
 }));

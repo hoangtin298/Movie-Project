@@ -100,13 +100,13 @@ function Purchase(props) {
         <LoadingPage />
       ) : (
         <Grid container>
-          <Grid item xs={8}>
+          <Grid item xs={12} sm={12} md={8}>
             <div className={classes.chairContainer}>
               <img
                 style={{ width: "100%" }}
                 src="https://tix.vn/app/assets/img/icons/screen.png"
               />
-              <div style={{ width: "79.9%", margin: "0 auto" }}>
+              <div className={classes.chairArea}>
                 {movieShowtimes.data
                   ? renderMovieChair(movieShowtimes.data)
                   : null}
@@ -119,14 +119,18 @@ function Purchase(props) {
                   >
                     X
                   </Button>
-                  <Typography>Đã đặt</Typography>
+                  <Typography className={classes.fontResponsive}>
+                    Đã đặt
+                  </Typography>
                 </div>
                 <div className={classes.demoChairGroup}>
                   <Button
                     disabled={true}
                     className={`${classes.chair} ${classes.demoChair}`}
                   ></Button>
-                  <Typography>Thường</Typography>
+                  <Typography className={classes.fontResponsive}>
+                    Thường
+                  </Typography>
                 </div>
                 <div className={classes.demoChairGroup}>
                   <Button
@@ -134,13 +138,15 @@ function Purchase(props) {
                     className={`${classes.chair} ${classes.vipChair} ${classes.demoChair}`}
                   ></Button>
 
-                  <Typography>Vip</Typography>
+                  <Typography className={classes.fontResponsive}>
+                    Vip
+                  </Typography>
                 </div>
               </div>
             </div>
           </Grid>
           {movieShowtimes.data ? (
-            <Grid item xs={4}>
+            <Grid item xs={12} sm={12} md={4}>
               <div className={classes.datveBox}>
                 <div className={classes.sectionSpacing}>
                   <Typography
@@ -163,7 +169,12 @@ function Purchase(props) {
                 <div
                   className={`${classes.sectionSpacing} ${classes.flexInfo}`}
                 >
-                  <Typography variant="h3">Cụm Rạp:</Typography>
+                  <Typography
+                    variant="h3"
+                    className={classes.fontResponsiveReceipt}
+                  >
+                    Cụm Rạp:
+                  </Typography>
                   <Typography variant="h3" className={classes.spanInfo}>
                     {movieShowtimes.data.thongTinPhim.tenCumRap}
                   </Typography>
@@ -172,7 +183,12 @@ function Purchase(props) {
                 <div
                   className={`${classes.sectionSpacing} ${classes.flexInfo}`}
                 >
-                  <Typography variant="h3">Địa chỉ:</Typography>
+                  <Typography
+                    variant="h3"
+                    className={classes.fontResponsiveReceipt}
+                  >
+                    Địa chỉ:
+                  </Typography>
                   <Typography
                     variant="h3"
                     className={`${classes.spanInfo} ${classes.textElipsis}`}
@@ -184,7 +200,12 @@ function Purchase(props) {
                 <div
                   className={`${classes.sectionSpacing} ${classes.flexInfo}`}
                 >
-                  <Typography variant="h3">Rạp:</Typography>
+                  <Typography
+                    variant="h3"
+                    className={classes.fontResponsiveReceipt}
+                  >
+                    Rạp:
+                  </Typography>
                   <Typography variant="h3" className={classes.spanInfo}>
                     {movieShowtimes.data.thongTinPhim.tenRap}
                   </Typography>
@@ -193,7 +214,12 @@ function Purchase(props) {
                 <div
                   className={`${classes.sectionSpacing} ${classes.flexInfo}`}
                 >
-                  <Typography variant="h3">Ngày giờ chiếu:</Typography>
+                  <Typography
+                    variant="h3"
+                    className={classes.fontResponsiveReceipt}
+                  >
+                    Ngày giờ chiếu:
+                  </Typography>
                   <Typography variant="h3" className={classes.spanInfo}>
                     {movieShowtimes.data.thongTinPhim.ngayChieu} -{" "}
                     <span style={{ color: "red" }}>
@@ -205,7 +231,12 @@ function Purchase(props) {
                 <div
                   className={`${classes.sectionSpacing} ${classes.flexInfo}`}
                 >
-                  <Typography variant="h3">Tên Phim:</Typography>
+                  <Typography
+                    variant="h3"
+                    className={classes.fontResponsiveReceipt}
+                  >
+                    Tên Phim:
+                  </Typography>
                   <Typography variant="h3" className={classes.spanInfo}>
                     {movieShowtimes.data.thongTinPhim.tenPhim}
                   </Typography>
@@ -214,7 +245,12 @@ function Purchase(props) {
                 <div
                   className={`${classes.sectionSpacing} ${classes.flexInfo}`}
                 >
-                  <Typography variant="h3">Chọn: </Typography>
+                  <Typography
+                    variant="h3"
+                    className={classes.fontResponsiveReceipt}
+                  >
+                    Chọn:{" "}
+                  </Typography>
                   <Typography variant="h3" className={classes.spanInfo}>
                     {movieShowtimes.bookingChairList.map((bookChair, index) => {
                       return <span>Ghế {bookChair.stt}, </span>;

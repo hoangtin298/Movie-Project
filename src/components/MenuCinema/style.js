@@ -6,18 +6,18 @@ export const useStyles = makeStyles((theme) => ({
     backgroundColor: theme.palette.background.paper,
     display: "flex",
     padding: "0!important",
-    height: "600px",
     border: `1px solid ${theme.palette.divider}`,
   },
   tabs: {
     borderRight: `1px solid ${theme.palette.divider}`,
-    width: "90px",
+    width: "92px",
     position: "relative",
+    borderTopLeftRadius: "4px",
+    borderBottomLeftRadius: "4px",
   },
   tabLogo: {
     padding: 20,
     minWidth: "unset",
-
     "&:after": {
       content: "''",
       display: "block",
@@ -28,9 +28,14 @@ export const useStyles = makeStyles((theme) => ({
       background: "rgba(238,238,238,0.88)",
     },
   },
+  avartar: {
+    width: "50px",
+    height: "50px",
+  },
   overFlowYCustom: {
-    overflowY: "scroll",
-    height: "600px",
+    overflowY: "auto",
+    height: "702px",
+    width: "calc(100% - 92px)",
     padding: "0 0 0 16px",
     "&::-webkit-scrollbar": {
       width: "7px",
@@ -55,8 +60,6 @@ export const useStyles = makeStyles((theme) => ({
     textDecoration: "none",
   },
   buttonTimeDate: {
-    // width: "100%",
-    // whiteSpace: "nowrap",
     textDecoration: "none",
     backgroundColor: "rgba(246, 246, 246, 0.5)",
     border: "1px solid #e4e4e4",

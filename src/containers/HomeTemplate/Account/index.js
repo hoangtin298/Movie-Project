@@ -13,6 +13,7 @@ import {
   Typography,
   Divider,
 } from "@material-ui/core";
+import { Link } from "react-router-dom";
 import { Visibility, VisibilityOff } from "@material-ui/icons";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
@@ -106,6 +107,21 @@ const useStyles = makeStyles((theme) => ({
       zIndex: "0",
     },
   },
+  linkContainer: {
+    padding: theme.spacing(4),
+    backgroundColor: "white",
+    paddingRight: "0!important",
+  },
+  linkToManage: {
+    color: "white",
+    backgroundColor: theme.palette.primary.main,
+    textDecoration: "none",
+    padding: theme.spacing(1, 2),
+    borderRadius: 4,
+  },
+  marginNe: {
+    marginBottom: theme.spacing(3),
+  },
 }));
 
 export default function Account() {
@@ -115,7 +131,6 @@ export default function Account() {
     mode: "onBlur",
     resolver: yupResolver(schema),
   });
-
   useEffect(() => {
     if (localStorage.getItem("currentUser")) {
       dispatch(
@@ -134,9 +149,10 @@ export default function Account() {
 
   const [showPassword, setShowPassword] = useState(false);
   const [user, setUser] = useState(currentUser.data?.[0]);
-
+  const [typeUser, settypeUser] = useState("");
   useEffect(() => {
     setUser(currentUser.data?.[0]);
+    settypeUser(currentUser.data?.[0].maLoaiNguoiDung);
   }, [currentUser]);
 
   if (!localStorage.getItem("currentUser")) {
@@ -261,6 +277,21 @@ export default function Account() {
       ) : (
         <Container component="main" maxWidth="md">
           <CssBaseline />
+          {typeUser === "QuanTri" ? (
+            <Grid
+              container
+              alignItems="flex-end"
+              justify="flex-end"
+              spacing={4}
+              className={classes.marginNe}
+            >
+              <Grid item xs={2} className={classes.linkContainer}>
+                <Link to="/manage-user" className={classes.linkToManage}>
+                  Trang Quản Lý
+                </Link>
+              </Grid>
+            </Grid>
+          ) : null}
           {user && (
             <form className={classes.form} noValidate>
               <Grid className={classes.formContainer} container spacing={3}>

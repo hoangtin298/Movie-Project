@@ -14,6 +14,7 @@ export const useStyles = makeStyles((theme) => ({
     position: "relative",
     width: 90,
     border: `1px solid ${theme.palette.grey[300]}`,
+    borderRadius: "4px",
   },
   cinemaLogoTab: {
     padding: 20,
@@ -84,10 +85,23 @@ export const useStyles = makeStyles((theme) => ({
   },
   cinemaTabPanel: {
     flexGrow: 1,
-    overflowY: "scroll",
+    overflowY: "auto",
     width: "540px",
     border: `1px solid ${theme.palette.grey[300]}`,
     borderLeft: "none",
+    borderRadius: "4px",
+    "&::-webkit-scrollbar": {
+      width: "7px",
+    },
+    "&::-webkit-scrollbar-track": {
+      boxShadow: "inset 0 0 5px grey",
+      borderRadius: "10px",
+    },
+    "&::-webkit-scrollbar-thumb": {
+      boxShadow: "inset 0 0 5px #616161",
+      background: theme.palette.common.white,
+      borderRadius: "10px",
+    },
   },
   ngayChieu: {
     color: theme.palette.secondary.light,
